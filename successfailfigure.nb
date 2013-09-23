@@ -1,0 +1,2338 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 9.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     95733,       2329]
+NotebookOptionsPosition[     94261,       2275]
+NotebookOutlinePosition[     94621,       2291]
+CellTagsIndexPosition[     94578,       2288]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[
+ RowBox[{"SetDirectory", "[", 
+  "\"\<~/Dropbox/Posttraumatic Medoids Disorder/CodeForPaper/\>\"", 
+  "]"}]], "Input"],
+
+Cell[BoxData["\<\"/Users/anellore/Dropbox/Posttraumatic Medoids \
+Disorder/CodeForPaper\"\>"], "Output",
+ CellChangeTimes->{3.586479263511787*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"failpts2", " ", "=", " ", 
+   RowBox[{"Import", "[", "\"\<fail_pts_2balls.csv\>\"", "]"}]}], ";", 
+  RowBox[{"failsoln2", "=", 
+   RowBox[{"Import", "[", "\"\<fail_soln_2balls.csv\>\"", "]"}]}], ";", 
+  RowBox[{"successpts2", "=", 
+   RowBox[{"Import", "[", "\"\<success_pts_2balls.csv\>\"", "]"}]}], ";", 
+  RowBox[{"successsoln2", " ", "=", " ", 
+   RowBox[{"Import", "[", "\"\<success_soln_2balls.csv\>\"", "]"}]}], ";", 
+  RowBox[{"failpts3", " ", "=", " ", 
+   RowBox[{"Import", "[", "\"\<fail_pts_3balls.csv\>\"", "]"}]}], ";", 
+  RowBox[{"failsoln3", "=", 
+   RowBox[{"Import", "[", "\"\<fail_soln_3balls.csv\>\"", "]"}]}], ";", 
+  RowBox[{"successpts3", "=", 
+   RowBox[{"Import", "[", "\"\<success_pts_3balls.csv\>\"", "]"}]}], ";", 
+  RowBox[{"successsoln3", "=", " ", 
+   RowBox[{"Import", "[", "\"\<success_soln_3balls.csv\>\"", "]"}]}], 
+  ";"}]], "Input",
+ CellChangeTimes->{{3.586454154676751*^9, 3.586454160380013*^9}, {
+  3.5864545758326683`*^9, 3.5864545892403307`*^9}, {3.586454740903813*^9, 
+  3.5864547831198463`*^9}, {3.5864548278342*^9, 3.586454847696887*^9}, {
+  3.586455200973893*^9, 3.586455205133915*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"successclusters3", "=", 
+   RowBox[{"DeleteDuplicates", "[", "successsoln3", "]"}]}], ";", 
+  RowBox[{"successcluster31", " ", "=", " ", 
+   RowBox[{"successpts3", "[", 
+    RowBox[{"[", 
+     RowBox[{"Flatten", "[", 
+      RowBox[{"Position", "[", 
+       RowBox[{"successsoln3", ",", 
+        RowBox[{"successclusters3", "[", 
+         RowBox[{"[", "1", "]"}], "]"}]}], "]"}], "]"}], "]"}], "]"}]}], ";", 
+  
+  RowBox[{"successcluster32", "=", 
+   RowBox[{"successpts3", "[", 
+    RowBox[{"[", 
+     RowBox[{"Flatten", "[", 
+      RowBox[{"Position", "[", 
+       RowBox[{"successsoln3", ",", 
+        RowBox[{"successclusters3", "[", 
+         RowBox[{"[", "2", "]"}], "]"}]}], "]"}], "]"}], "]"}], "]"}]}], ";", 
+  
+  RowBox[{"successcluster33", "=", 
+   RowBox[{"successpts3", "[", 
+    RowBox[{"[", 
+     RowBox[{"Flatten", "[", 
+      RowBox[{"Position", "[", 
+       RowBox[{"successsoln3", ",", 
+        RowBox[{"successclusters3", "[", 
+         RowBox[{"[", "3", "]"}], "]"}]}], "]"}], "]"}], "]"}], "]"}]}], ";", 
+  
+  RowBox[{"successclusters3medoids", "=", 
+   RowBox[{"successpts3", "[", 
+    RowBox[{"[", 
+     RowBox[{
+      RowBox[{"Position", "[", 
+       RowBox[{"successclusters3", ",", " ", "1"}], "]"}], "[", 
+      RowBox[{"[", 
+       RowBox[{"All", ",", "2"}], "]"}], "]"}], "]"}], "]"}]}], 
+  ";"}]], "Input",
+ CellChangeTimes->{{3.5864552087248297`*^9, 3.58645521047663*^9}, {
+  3.5864552626932163`*^9, 3.58645526701328*^9}, {3.586455306918357*^9, 
+  3.5864553330372*^9}, {3.5864553878578253`*^9, 3.5864554126154747`*^9}, {
+  3.5864559097587748`*^9, 3.5864559404174137`*^9}, {3.5864560117387133`*^9, 
+  3.58645606010425*^9}, {3.58645978631625*^9, 3.586459799155427*^9}, {
+  3.586459832676477*^9, 3.5864598686195173`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"successclusters2", "=", 
+   RowBox[{"DeleteDuplicates", "[", "successsoln2", "]"}]}], ";", 
+  RowBox[{"successcluster21", " ", "=", " ", 
+   RowBox[{"successpts2", "[", 
+    RowBox[{"[", 
+     RowBox[{"Flatten", "[", 
+      RowBox[{"Position", "[", 
+       RowBox[{"successsoln2", ",", 
+        RowBox[{"successclusters2", "[", 
+         RowBox[{"[", "1", "]"}], "]"}]}], "]"}], "]"}], "]"}], "]"}]}], ";", 
+  
+  RowBox[{"successcluster22", "=", 
+   RowBox[{"successpts2", "[", 
+    RowBox[{"[", 
+     RowBox[{"Flatten", "[", 
+      RowBox[{"Position", "[", 
+       RowBox[{"successsoln2", ",", 
+        RowBox[{"successclusters2", "[", 
+         RowBox[{"[", "2", "]"}], "]"}]}], "]"}], "]"}], "]"}], "]"}]}], ";", 
+  
+  RowBox[{"successclusters2medoids", "=", 
+   RowBox[{"successpts2", "[", 
+    RowBox[{"[", 
+     RowBox[{
+      RowBox[{"Position", "[", 
+       RowBox[{"successclusters2", ",", " ", "1"}], "]"}], "[", 
+      RowBox[{"[", 
+       RowBox[{"All", ",", "2"}], "]"}], "]"}], "]"}], "]"}]}], 
+  ";"}]], "Input",
+ CellChangeTimes->{{3.586461482379512*^9, 3.586461524330728*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"failclusters3", "=", 
+   RowBox[{"DeleteDuplicates", "[", "failsoln3", "]"}]}], ";", 
+  RowBox[{"failcluster31", " ", "=", " ", 
+   RowBox[{"failpts3", "[", 
+    RowBox[{"[", 
+     RowBox[{"Flatten", "[", 
+      RowBox[{"Position", "[", 
+       RowBox[{"failsoln3", ",", 
+        RowBox[{"failclusters3", "[", 
+         RowBox[{"[", "1", "]"}], "]"}]}], "]"}], "]"}], "]"}], "]"}]}], ";", 
+  
+  RowBox[{"failcluster32", "=", 
+   RowBox[{"failpts3", "[", 
+    RowBox[{"[", 
+     RowBox[{"Flatten", "[", 
+      RowBox[{"Position", "[", 
+       RowBox[{"failsoln3", ",", 
+        RowBox[{"failclusters3", "[", 
+         RowBox[{"[", "2", "]"}], "]"}]}], "]"}], "]"}], "]"}], "]"}]}], ";", 
+  
+  RowBox[{"failcluster33", "=", 
+   RowBox[{"failpts3", "[", 
+    RowBox[{"[", 
+     RowBox[{"Flatten", "[", 
+      RowBox[{"Position", "[", 
+       RowBox[{"failsoln3", ",", 
+        RowBox[{"failclusters3", "[", 
+         RowBox[{"[", "3", "]"}], "]"}]}], "]"}], "]"}], "]"}], "]"}]}], ";", 
+  
+  RowBox[{"failclusters3medoids", "=", 
+   RowBox[{"failpts3", "[", 
+    RowBox[{"[", 
+     RowBox[{
+      RowBox[{"Position", "[", 
+       RowBox[{"failclusters3", ",", " ", "1"}], "]"}], "[", 
+      RowBox[{"[", 
+       RowBox[{"All", ",", "2"}], "]"}], "]"}], "]"}], "]"}]}], 
+  ";"}]], "Input",
+ CellChangeTimes->{{3.586458838331503*^9, 3.586458907811384*^9}, 
+   3.586460594789949*^9, {3.5864609946447477`*^9, 3.58646100407688*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"failclusters2", "=", 
+   RowBox[{"DeleteDuplicates", "[", "failsoln2", "]"}]}], ";", 
+  RowBox[{"failcluster21", " ", "=", " ", 
+   RowBox[{"failpts2", "[", 
+    RowBox[{"[", 
+     RowBox[{"Flatten", "[", 
+      RowBox[{"Position", "[", 
+       RowBox[{"failsoln2", ",", 
+        RowBox[{"failclusters2", "[", 
+         RowBox[{"[", "1", "]"}], "]"}]}], "]"}], "]"}], "]"}], "]"}]}], ";", 
+  
+  RowBox[{"failcluster22", "=", 
+   RowBox[{"failpts2", "[", 
+    RowBox[{"[", 
+     RowBox[{"Flatten", "[", 
+      RowBox[{"Position", "[", 
+       RowBox[{"failsoln2", ",", 
+        RowBox[{"failclusters2", "[", 
+         RowBox[{"[", "2", "]"}], "]"}]}], "]"}], "]"}], "]"}], "]"}]}], ";", 
+  
+  RowBox[{"failclusters2medoids", "=", 
+   RowBox[{"failpts2", "[", 
+    RowBox[{"[", 
+     RowBox[{
+      RowBox[{"Position", "[", 
+       RowBox[{"failclusters2", ",", " ", "1"}], "]"}], "[", 
+      RowBox[{"[", 
+       RowBox[{"All", ",", "2"}], "]"}], "]"}], "]"}], "]"}]}], 
+  ";"}]], "Input",
+ CellChangeTimes->{{3.58646153799575*^9, 3.5864615731871033`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"s3", "=", 
+  RowBox[{"Show", "[", 
+   RowBox[{
+    RowBox[{"ListPlot", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+       "successcluster31", ",", "successcluster32", ",", "successcluster33", 
+        ",", 
+        RowBox[{"{", 
+         RowBox[{"successclusters3medoids", "[", 
+          RowBox[{"[", "1", "]"}], "]"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"successclusters3medoids", "[", 
+          RowBox[{"[", "2", "]"}], "]"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"successclusters3medoids", "[", 
+          RowBox[{"[", "3", "]"}], "]"}], "}"}]}], "}"}], ",", " ", 
+      RowBox[{"PlotMarkers", "\[Rule]", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"\"\<\[FilledCircle]\>\"", ",", " ", "12"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"\"\<\[FilledSquare]\>\"", ",", "12"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"\"\<\[FilledDiamond]\>\"", ",", "12"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"\"\<\[FilledCircle]\>\"", ",", "24"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"\"\<\[FilledSquare]\>\"", ",", "24"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"\"\<\[FilledDiamond]\>\"", ",", "24"}], "}"}]}], "}"}]}], 
+      ",", " ", 
+      RowBox[{"PlotStyle", "\[Rule]", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"ColorData", "[", 
+          RowBox[{"1", ",", "2"}], "]"}], ",", 
+         RowBox[{"ColorData", "[", 
+          RowBox[{"1", ",", "3"}], "]"}], ",", 
+         RowBox[{"ColorData", "[", 
+          RowBox[{"1", ",", "1"}], "]"}]}], "}"}]}], ",", " ", 
+      RowBox[{"Axes", "\[Rule]", "None"}], ",", 
+      RowBox[{"Frame", "\[Rule]", "False"}], ",", 
+      RowBox[{"FrameStyle", "\[Rule]", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"Directive", "[", 
+          RowBox[{
+           RowBox[{"FontFamily", "->", "\"\<Futura\>\""}], ",", " ", 
+           RowBox[{"FontSize", "\[Rule]", "12"}], ",", "Black"}], "]"}], ",", 
+         " ", 
+         RowBox[{"Directive", "[", 
+          RowBox[{
+           RowBox[{"FontFamily", "->", "\"\<Futura\>\""}], ",", " ", 
+           RowBox[{"FontSize", "\[Rule]", "12"}]}], "]"}]}], " ", "}"}]}]}], 
+     "]"}], ",", 
+    RowBox[{"Graphics", "[", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"ColorData", "[", 
+        RowBox[{"1", ",", "2"}], "]"}], ",", "Dashed", ",", "Thick", ",", 
+       RowBox[{"Circle", "[", 
+        RowBox[{"{", 
+         RowBox[{"0", ",", "0"}], "}"}], "]"}]}], "}"}], "]"}], ",", " ", 
+    RowBox[{"Graphics", "[", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"ColorData", "[", 
+        RowBox[{"1", ",", "3"}], "]"}], ",", "Dashed", ",", "Thick", ",", 
+       RowBox[{"Circle", "[", 
+        RowBox[{"{", 
+         RowBox[{"2.5", ",", "0"}], "}"}], "]"}]}], "}"}], "]"}], ",", 
+    RowBox[{"Graphics", "[", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"ColorData", "[", 
+        RowBox[{"1", ",", "1"}], "]"}], ",", "Dashed", ",", "Thick", ",", 
+       RowBox[{"Circle", "[", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"2.5", "/", "2"}], ",", 
+          RowBox[{
+           RowBox[{"2.5", "/", "2"}], " ", "*", " ", 
+           RowBox[{"Sqrt", "[", "3", "]"}]}]}], "}"}], "]"}]}], "}"}], "]"}], 
+    ",", " ", 
+    RowBox[{"PlotRange", "\[Rule]", "All"}], ",", " ", 
+    RowBox[{"AspectRatio", "\[Rule]", 
+     RowBox[{"4", "/", "4.5"}]}], ",", 
+    RowBox[{"PlotLabel", "\[Rule]", 
+     RowBox[{"Style", "[", 
+      RowBox[{"\"\<c) ball recovery for three clusters\>\"", ",", " ", 
+       RowBox[{"FontFamily", "->", "\"\<Futura\>\""}], ",", " ", 
+       RowBox[{"FontSize", "\[Rule]", "17"}], ",", " ", 
+       RowBox[{"RGBColor", "[", 
+        RowBox[{
+         RowBox[{"227", "/", "256"}], ",", 
+         RowBox[{"29", "/", "256"}], ",", 
+         RowBox[{"118", "/", "256"}]}], "]"}]}], "]"}]}]}], "]"}]}]], "Input",\
+
+ CellChangeTimes->{{3.5864560707269087`*^9, 3.586456090544421*^9}, {
+   3.5864573153434362`*^9, 3.586457403375635*^9}, {3.586457459097608*^9, 
+   3.5864574628001003`*^9}, {3.5864575022876177`*^9, 3.5864575028722*^9}, {
+   3.58645763946176*^9, 3.586457687519703*^9}, {3.586457847159996*^9, 
+   3.58645787364887*^9}, {3.586457968462083*^9, 3.5864579776285973`*^9}, {
+   3.586458154803689*^9, 3.586458233436469*^9}, {3.586458412817498*^9, 
+   3.586458512138912*^9}, {3.586458579763422*^9, 3.586458587659555*^9}, {
+   3.5864586779118023`*^9, 3.5864587628808823`*^9}, {3.5864597548856*^9, 
+   3.586459755684868*^9}, {3.5864599251261177`*^9, 3.5864599682049007`*^9}, {
+   3.586459999572968*^9, 3.586460030692832*^9}, {3.586460171941517*^9, 
+   3.586460200252857*^9}, 3.5864603896487103`*^9, {3.586460427166367*^9, 
+   3.586460566344665*^9}, {3.586462158761155*^9, 3.58646217032826*^9}, {
+   3.586462207377184*^9, 3.58646220748917*^9}, {3.586464799168469*^9, 
+   3.586464808640057*^9}, {3.58646506582253*^9, 3.586465069061516*^9}, {
+   3.586465811174646*^9, 3.586465832628934*^9}, {3.5864658746379538`*^9, 
+   3.586465904109145*^9}, {3.586466017171918*^9, 3.586466042539762*^9}, {
+   3.586468873430254*^9, 3.586468873702218*^9}, {3.586476912844986*^9, 
+   3.5864769133185062`*^9}, {3.586477284528605*^9, 3.586477284948681*^9}, {
+   3.587462013481989*^9, 3.587462153297741*^9}, {3.587467936477148*^9, 
+   3.587467982658058*^9}}],
+
+Cell[BoxData[
+ GraphicsBox[{{{}, GraphicsComplexBox[CompressedData["
+1:eJxTTMoPSmViYGBIA2IQfezhmfXPGM7ad74/skbc+ag9/xzjRVvMn9i7zeQ1
+Onni5v4Z+voH7Kwe26fI/WxufH5j//PHtwIMz13fz7Y78faiM0/tX3e3bJvj
+fdBeWfSYWJPM6/1Hn4EUPN7PzOY5P+xi/36/+m/KrikP99/RM7meueTlfslH
+EeLbLz6wf6p+1U62/5G9+PqzIV8fM9jnic96bXLpof1L17d1og8W7zf8LNpd
+88rLvv3nJ6Y3ix/ZJxaclf2rv3z//b8f47YanbXXC7uSINX2bv/3iF8XWL+e
+td/MU7im+/YN+4sv+JLSue7bpzIK7yg1f73/o/ffPSs9rttzXV9cYMv1dv/x
+XTt62QpYHKZ+fG+sJ3Ntf+NU5+6c5//tH5X+bbq74el+VhNBMxtbNgedK7Oe
+yS6/sP+I09rMe4XsDh81GY4ZZ9yyj/M+wW4rzeFwbDmDxPkF9+1nlc9ZpLyT
+wUHOOEDyv93j/e9PHgbqYHOI3rj/zTybK/t7vF6xmExkcVA/sOHPz2077IM8
+5zaoOXE4dL5a27hW6MR+4cTDl7Wfsjnck38fqi18yj7dJTP/QyuHw/NjX1pU
+5S7YHwCaohPC7OAADohH+8HG6jA7bAhtOvrwzP79T5rnnV3lz+4grP7dWoT1
+zf6IFaZnrf1+2W+J/LrzVtdde+MjG/XyFr+1B6s7z+7AuyzxR8eMh/ZvefcZ
+zNT6Z7/6/NWwN/of7SWmXuHMUGJ2CNLZvkVK6D5UnsVB7PfpdycPf7a3qwSZ
+zOgQU/45pP3OG3tJljA+3U2sDizPezTe9jI6PHo5dRNPIZPDnpLJEixh/+y/
+Tb87ub31t/0U352HdsfcsT8VcnDFEr+f9rlhteu2JX23v1fY1fekiMMh57wO
+Z0DwffuVS/wchBP/2t9xY67gVvlonwYCzxgdPiafifU+8dVe9uRT+yXxLA4d
+rVGX9zz+bf8mcIdc62tGB5dfb18fsPxov2z2EYUNRT8x0g86Hz380Pno9qPz
+R/PLaH4ZzS/E5xcAf8U+zQ==
+     "], {
+      {RGBColor[0.6, 0.24, 0.4428931686004542], InsetBox[
+        StyleBox["\<\"\[FilledCircle]\"\>",
+         StripOnInput->False,
+         FontSize->12], 52], InsetBox[
+        StyleBox["\<\"\[FilledCircle]\"\>",
+         StripOnInput->False,
+         FontSize->12], 53], InsetBox[
+        StyleBox["\<\"\[FilledCircle]\"\>",
+         StripOnInput->False,
+         FontSize->12], 54], InsetBox[
+        StyleBox["\<\"\[FilledCircle]\"\>",
+         StripOnInput->False,
+         FontSize->12], 55], InsetBox[
+        StyleBox["\<\"\[FilledCircle]\"\>",
+         StripOnInput->False,
+         FontSize->12], 56], InsetBox[
+        StyleBox["\<\"\[FilledCircle]\"\>",
+         StripOnInput->False,
+         FontSize->12], 57], InsetBox[
+        StyleBox["\<\"\[FilledCircle]\"\>",
+         StripOnInput->False,
+         FontSize->12], 58], InsetBox[
+        StyleBox["\<\"\[FilledCircle]\"\>",
+         StripOnInput->False,
+         FontSize->12], 59], InsetBox[
+        StyleBox["\<\"\[FilledCircle]\"\>",
+         StripOnInput->False,
+         FontSize->12], 60], InsetBox[
+        StyleBox["\<\"\[FilledCircle]\"\>",
+         StripOnInput->False,
+         FontSize->12], 61], InsetBox[
+        StyleBox["\<\"\[FilledCircle]\"\>",
+         StripOnInput->False,
+         FontSize->12], 62], InsetBox[
+        StyleBox["\<\"\[FilledCircle]\"\>",
+         StripOnInput->False,
+         FontSize->12], 63], InsetBox[
+        StyleBox["\<\"\[FilledCircle]\"\>",
+         StripOnInput->False,
+         FontSize->12], 64], InsetBox[
+        StyleBox["\<\"\[FilledCircle]\"\>",
+         StripOnInput->False,
+         FontSize->12], 65], InsetBox[
+        StyleBox["\<\"\[FilledCircle]\"\>",
+         StripOnInput->False,
+         FontSize->12], 66]}, 
+      {RGBColor[0.6, 0.5470136627990908, 0.24], InsetBox[
+        StyleBox["\<\"\[FilledSquare]\"\>",
+         StripOnInput->False,
+         FontSize->12], 67], InsetBox[
+        StyleBox["\<\"\[FilledSquare]\"\>",
+         StripOnInput->False,
+         FontSize->12], 68], InsetBox[
+        StyleBox["\<\"\[FilledSquare]\"\>",
+         StripOnInput->False,
+         FontSize->12], 69], InsetBox[
+        StyleBox["\<\"\[FilledSquare]\"\>",
+         StripOnInput->False,
+         FontSize->12], 70], InsetBox[
+        StyleBox["\<\"\[FilledSquare]\"\>",
+         StripOnInput->False,
+         FontSize->12], 71], InsetBox[
+        StyleBox["\<\"\[FilledSquare]\"\>",
+         StripOnInput->False,
+         FontSize->12], 72], InsetBox[
+        StyleBox["\<\"\[FilledSquare]\"\>",
+         StripOnInput->False,
+         FontSize->12], 73], InsetBox[
+        StyleBox["\<\"\[FilledSquare]\"\>",
+         StripOnInput->False,
+         FontSize->12], 74], InsetBox[
+        StyleBox["\<\"\[FilledSquare]\"\>",
+         StripOnInput->False,
+         FontSize->12], 75], InsetBox[
+        StyleBox["\<\"\[FilledSquare]\"\>",
+         StripOnInput->False,
+         FontSize->12], 76], InsetBox[
+        StyleBox["\<\"\[FilledSquare]\"\>",
+         StripOnInput->False,
+         FontSize->12], 77], InsetBox[
+        StyleBox["\<\"\[FilledSquare]\"\>",
+         StripOnInput->False,
+         FontSize->12], 78], InsetBox[
+        StyleBox["\<\"\[FilledSquare]\"\>",
+         StripOnInput->False,
+         FontSize->12], 79], InsetBox[
+        StyleBox["\<\"\[FilledSquare]\"\>",
+         StripOnInput->False,
+         FontSize->12], 80], InsetBox[
+        StyleBox["\<\"\[FilledSquare]\"\>",
+         StripOnInput->False,
+         FontSize->12], 81]}, 
+      {RGBColor[0.24720000000000014`, 0.24, 0.6], InsetBox[
+        StyleBox["\<\"\[FilledDiamond]\"\>",
+         StripOnInput->False,
+         FontSize->12], 82], InsetBox[
+        StyleBox["\<\"\[FilledDiamond]\"\>",
+         StripOnInput->False,
+         FontSize->12], 83], InsetBox[
+        StyleBox["\<\"\[FilledDiamond]\"\>",
+         StripOnInput->False,
+         FontSize->12], 84], InsetBox[
+        StyleBox["\<\"\[FilledDiamond]\"\>",
+         StripOnInput->False,
+         FontSize->12], 85], InsetBox[
+        StyleBox["\<\"\[FilledDiamond]\"\>",
+         StripOnInput->False,
+         FontSize->12], 86], InsetBox[
+        StyleBox["\<\"\[FilledDiamond]\"\>",
+         StripOnInput->False,
+         FontSize->12], 87], InsetBox[
+        StyleBox["\<\"\[FilledDiamond]\"\>",
+         StripOnInput->False,
+         FontSize->12], 88], InsetBox[
+        StyleBox["\<\"\[FilledDiamond]\"\>",
+         StripOnInput->False,
+         FontSize->12], 89], InsetBox[
+        StyleBox["\<\"\[FilledDiamond]\"\>",
+         StripOnInput->False,
+         FontSize->12], 90], InsetBox[
+        StyleBox["\<\"\[FilledDiamond]\"\>",
+         StripOnInput->False,
+         FontSize->12], 91], InsetBox[
+        StyleBox["\<\"\[FilledDiamond]\"\>",
+         StripOnInput->False,
+         FontSize->12], 92], InsetBox[
+        StyleBox["\<\"\[FilledDiamond]\"\>",
+         StripOnInput->False,
+         FontSize->12], 93], InsetBox[
+        StyleBox["\<\"\[FilledDiamond]\"\>",
+         StripOnInput->False,
+         FontSize->12], 94], InsetBox[
+        StyleBox["\<\"\[FilledDiamond]\"\>",
+         StripOnInput->False,
+         FontSize->12], 95], InsetBox[
+        StyleBox["\<\"\[FilledDiamond]\"\>",
+         StripOnInput->False,
+         FontSize->12], 96]}, 
+      {RGBColor[0.6, 0.24, 0.4428931686004542], InsetBox[
+        StyleBox["\<\"\[FilledCircle]\"\>",
+         StripOnInput->False,
+         FontSize->24], 97], InsetBox[
+        StyleBox["\<\"\[FilledCircle]\"\>",
+         StripOnInput->False,
+         FontSize->24], 98]}, 
+      {RGBColor[0.6, 0.5470136627990908, 0.24], InsetBox[
+        StyleBox["\<\"\[FilledSquare]\"\>",
+         StripOnInput->False,
+         FontSize->24], 99], InsetBox[
+        StyleBox["\<\"\[FilledSquare]\"\>",
+         StripOnInput->False,
+         FontSize->24], 100]}, 
+      {RGBColor[0.24720000000000014`, 0.24, 0.6], InsetBox[
+        StyleBox["\<\"\[FilledDiamond]\"\>",
+         StripOnInput->False,
+         FontSize->24], 101], InsetBox[
+        StyleBox["\<\"\[FilledDiamond]\"\>",
+         StripOnInput->False,
+         FontSize->24], 102]}, {}}], {}}, 
+   {RGBColor[0.6, 0.24, 0.4428931686004542], Thickness[Large], 
+    Dashing[{Small, Small}], CircleBox[{0, 0}]}, 
+   {RGBColor[0.6, 0.5470136627990908, 0.24], Thickness[Large], 
+    Dashing[{Small, Small}], CircleBox[{2.5, 0}]}, 
+   {RGBColor[0.24720000000000014`, 0.24, 0.6], Thickness[Large], 
+    Dashing[{Small, Small}], CircleBox[{1.25, 2.1650635094610964`}]}},
+  AspectRatio->0.8888888888888888,
+  Axes->None,
+  AxesOrigin->{0., 0.},
+  FrameStyle->{
+    Directive[FontFamily -> "Futura", FontSize -> 12, 
+     GrayLevel[0]], 
+    Directive[FontFamily -> "Futura", FontSize -> 12]},
+  Method->{},
+  PlotLabel->FormBox[
+    StyleBox[
+    "\"c) ball recovery for three clusters\"", FontFamily -> "Futura", 
+     FontSize -> 17, 
+     RGBColor[
+      Rational[227, 256], 
+      Rational[29, 256], 
+      Rational[59, 128]], StripOnInput -> False], TraditionalForm],
+  PlotRange->All,
+  PlotRangeClipping->True,
+  PlotRangePadding->{{0.0733034, 0.0733034}, {0.0801994, 
+   0.0801994}}]], "Output",
+ CellChangeTimes->{{3.586456084471181*^9, 3.5864560910477953`*^9}, {
+   3.586457350660235*^9, 3.5864574038037243`*^9}, 3.586457463251163*^9, 
+   3.586457646382619*^9, {3.586457679370633*^9, 3.5864576879334087`*^9}, {
+   3.586457848039483*^9, 3.586457873942008*^9}, {3.586457972066309*^9, 
+   3.5864579780289297`*^9}, {3.586458165904496*^9, 3.586458185105616*^9}, 
+   3.5864582358067217`*^9, 3.586458430066099*^9, {3.5864584655299473`*^9, 
+   3.58645851259228*^9}, {3.586458582693993*^9, 3.586458587994237*^9}, {
+   3.5864586785111303`*^9, 3.586458763101666*^9}, 3.5864597562947187`*^9, {
+   3.586459949706316*^9, 3.586459963556212*^9}, {3.586460014781163*^9, 
+   3.586460031146988*^9}, 3.5864602016760273`*^9, {3.5864604595393543`*^9, 
+   3.586460482494026*^9}, {3.586460528770522*^9, 3.586460567212946*^9}, 
+   3.5864621598619013`*^9, {3.5864621911882973`*^9, 3.586462215215527*^9}, 
+   3.586465069338489*^9, 3.586465833204514*^9, {3.58646587982677*^9, 
+   3.586465904620844*^9}, {3.586466019364408*^9, 3.58646604371837*^9}, 
+   3.586468897601676*^9, 3.586476913969388*^9, 3.5864770513465357`*^9, 
+   3.5864772852121563`*^9, {3.5864792471369257`*^9, 3.5864792640811367`*^9}, {
+   3.587462015196659*^9, 3.5874621535613213`*^9}, {3.587467937584753*^9, 
+   3.587467982937828*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"f3", "=", 
+  RowBox[{"Show", "[", 
+   RowBox[{
+    RowBox[{"ListPlot", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+       "failcluster31", ",", "failcluster32", ",", "failcluster33", ",", 
+        RowBox[{"{", 
+         RowBox[{"failclusters3medoids", "[", 
+          RowBox[{"[", "1", "]"}], "]"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"failclusters3medoids", "[", 
+          RowBox[{"[", "2", "]"}], "]"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"failclusters3medoids", "[", 
+          RowBox[{"[", "3", "]"}], "]"}], "}"}]}], "}"}], ",", " ", 
+      RowBox[{"PlotMarkers", "\[Rule]", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"\"\<\[FilledCircle]\>\"", ",", " ", "12"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"\"\<\[FilledSquare]\>\"", ",", "12"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"\"\<\[FilledDiamond]\>\"", ",", "12"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"\"\<\[FilledCircle]\>\"", ",", "24"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"\"\<\[FilledSquare]\>\"", ",", "24"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"\"\<\[FilledDiamond]\>\"", ",", "24"}], "}"}]}], "}"}]}], 
+      ",", " ", 
+      RowBox[{"PlotLabel", "\[Rule]", 
+       RowBox[{"Style", "[", 
+        RowBox[{
+        "\"\<d) failed ball recovery for three clusters\>\"", ",", " ", 
+         RowBox[{"FontFamily", "->", "\"\<Futura\>\""}], ",", " ", 
+         RowBox[{"FontSize", "\[Rule]", "17"}], ",", 
+         RowBox[{"RGBColor", "[", 
+          RowBox[{
+           RowBox[{"227", "/", "256"}], ",", 
+           RowBox[{"29", "/", "256"}], ",", 
+           RowBox[{"118", "/", "256"}]}], "]"}]}], "]"}]}], ",", 
+      RowBox[{"PlotStyle", "\[Rule]", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"ColorData", "[", 
+          RowBox[{"1", ",", "1"}], "]"}], ",", 
+         RowBox[{"ColorData", "[", 
+          RowBox[{"1", ",", "3"}], "]"}], ",", 
+         RowBox[{"ColorData", "[", 
+          RowBox[{"1", ",", "2"}], "]"}]}], "}"}]}], ",", " ", 
+      RowBox[{"Axes", "\[Rule]", "None"}], ",", 
+      RowBox[{"Frame", "\[Rule]", "False"}]}], "]"}], ",", "  ", 
+    RowBox[{"Graphics", "[", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"ColorData", "[", 
+        RowBox[{"1", ",", "1"}], "]"}], ",", "Dashed", ",", "Thick", ",", 
+       RowBox[{"Circle", "[", 
+        RowBox[{"{", 
+         RowBox[{"0", ",", "0"}], "}"}], "]"}]}], "}"}], "]"}], ",", 
+    RowBox[{"Graphics", "[", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"ColorData", "[", 
+        RowBox[{"1", ",", "3"}], "]"}], ",", "Dashed", ",", "Thick", ",", 
+       RowBox[{"Circle", "[", 
+        RowBox[{"{", 
+         RowBox[{"2.5", ",", "0"}], "}"}], "]"}]}], "}"}], "]"}], ",", 
+    RowBox[{"Graphics", "[", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"ColorData", "[", 
+        RowBox[{"1", ",", "2"}], "]"}], ",", "Dashed", ",", "Thick", ",", 
+       RowBox[{"Circle", "[", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"2.5", "/", "2"}], ",", 
+          RowBox[{
+           RowBox[{"2.5", "/", "2"}], " ", "*", " ", 
+           RowBox[{"Sqrt", "[", "3", "]"}]}]}], "}"}], "]"}]}], "}"}], "]"}], 
+    ",", " ", 
+    RowBox[{"PlotRange", "\[Rule]", "All"}], ",", " ", 
+    RowBox[{"AspectRatio", "\[Rule]", 
+     RowBox[{"4", "/", "4.5"}]}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.586458920100582*^9, 3.586458927732789*^9}, {
+  3.5864610185124903`*^9, 3.586461041661746*^9}, {3.5864620731381702`*^9, 
+  3.58646207707273*^9}, {3.58646217251318*^9, 3.586462178049018*^9}, {
+  3.586462210897922*^9, 3.5864622123559504`*^9}, {3.586465045230133*^9, 
+  3.5864650572303247`*^9}, {3.5864662055662413`*^9, 3.586466232549323*^9}, {
+  3.586466284676199*^9, 3.586466284915635*^9}, {3.586466445218787*^9, 
+  3.586466472124598*^9}, {3.586466637692477*^9, 3.586466658146734*^9}, {
+  3.58646815728358*^9, 3.586468165027128*^9}, {3.586468885893278*^9, 
+  3.5864688861333427`*^9}, {3.58647689970877*^9, 3.5864768998791437`*^9}, {
+  3.5864769655067997`*^9, 3.586477034231927*^9}, {3.586477066188431*^9, 
+  3.58647715051606*^9}}],
+
+Cell[BoxData[
+ GraphicsBox[{{{}, GraphicsComplexBox[CompressedData["
+1:eJxTTMoPSmViYGBIA2IQrX3vhM0n9vv2p3XXth2xfbVfwDr4xZ5jb/f79Fkv
+bf56fD/DY0mTL/7X9serbHka03Xf/oy6dttq5g32JoJmNnuD7u1f9NFF4PnD
+KftLJ0uwhPG9to99GKv3yPq1/X3Rg//DNt3cX7V6nbOp6kx73x9L6+6FvLM/
+eSLyxmW+m/t76+cXPnS4s/+U0ZGNenk37fd9OzOJwXSjvX2QS1vonkf7UyKO
+Ss90f2bPAAZX7CdVPuFnm/fM/k4GQ34jy1F7p00NnHd23d8vluX7uS/4wv4D
+dlalTzffs0/WUL8V6nF9//SjR549vvVkP9edXbOXWz3c/3jp7CMKG17sfzV1
+E0/hmt/2v+qy9pRMfmi/SS9vMeOe3/Ybu8yN+v88tlfKqahaqvPb/kunjeeu
+tAv7NWP6D33V+GPvXg4KmTv7S9ymfGO7z+bwaUbjqR/fn+9P60iOvXOM2eGf
+86+3rw+83T/j7uT21lucDpURK0zPWt+xT5V8FCG+ndOh7MEcwaV7T+7/d6Xi
+pZohi8POXrYPYh6P9uuDrG9ld6hk/HZxpfYze+8T7Lazr3I4hKv9CbLPP2fv
+lyQQYbmFy0Fw1ZU3jWEb9qeuSggJWs7l0Kd87VEwwxl7fzlQCLA7QML7kX3G
+xLc19qYsDjfPfQ9+vPTB/tMCx3ft6P1lH/BHovi6EJvDdaFPjufTGBw85zao
+HWr7Y98IJJeH/7e/8eGLVyQbiwM4GnU/20sF3pKuecjhoGU16XS9x2P7WJAH
+s9kcIOnkij3r0X7Dct1/9gKl8g1X1J7bg8Ml/qf9NOfunOe//9kDfcUqNIXR
+YerH98Z6Mm/sE0OC1BdwMkDN/24/x3jRFvMfDA4Q9V/twdbYszuY50RPualw
+2V7/rgpboyiTg71p3C5Pnr/2uoryX3LC2B2AcQ+0mNHh8r0H3JM1GR3AqaH/
+s/3fb6UP5kxkcEBPT+h89PhA56O7D50/ml9G88tofiE+vwAAPLYa6w==
+     "], {
+      {RGBColor[0.24720000000000014`, 0.24, 0.6], InsetBox[
+        StyleBox["\<\"\[FilledCircle]\"\>",
+         StripOnInput->False,
+         FontSize->12], 52], InsetBox[
+        StyleBox["\<\"\[FilledCircle]\"\>",
+         StripOnInput->False,
+         FontSize->12], 53], InsetBox[
+        StyleBox["\<\"\[FilledCircle]\"\>",
+         StripOnInput->False,
+         FontSize->12], 54], InsetBox[
+        StyleBox["\<\"\[FilledCircle]\"\>",
+         StripOnInput->False,
+         FontSize->12], 55], InsetBox[
+        StyleBox["\<\"\[FilledCircle]\"\>",
+         StripOnInput->False,
+         FontSize->12], 56], InsetBox[
+        StyleBox["\<\"\[FilledCircle]\"\>",
+         StripOnInput->False,
+         FontSize->12], 57], InsetBox[
+        StyleBox["\<\"\[FilledCircle]\"\>",
+         StripOnInput->False,
+         FontSize->12], 58], InsetBox[
+        StyleBox["\<\"\[FilledCircle]\"\>",
+         StripOnInput->False,
+         FontSize->12], 59], InsetBox[
+        StyleBox["\<\"\[FilledCircle]\"\>",
+         StripOnInput->False,
+         FontSize->12], 60], InsetBox[
+        StyleBox["\<\"\[FilledCircle]\"\>",
+         StripOnInput->False,
+         FontSize->12], 61], InsetBox[
+        StyleBox["\<\"\[FilledCircle]\"\>",
+         StripOnInput->False,
+         FontSize->12], 62], InsetBox[
+        StyleBox["\<\"\[FilledCircle]\"\>",
+         StripOnInput->False,
+         FontSize->12], 63], InsetBox[
+        StyleBox["\<\"\[FilledCircle]\"\>",
+         StripOnInput->False,
+         FontSize->12], 64], InsetBox[
+        StyleBox["\<\"\[FilledCircle]\"\>",
+         StripOnInput->False,
+         FontSize->12], 65], InsetBox[
+        StyleBox["\<\"\[FilledCircle]\"\>",
+         StripOnInput->False,
+         FontSize->12], 66], InsetBox[
+        StyleBox["\<\"\[FilledCircle]\"\>",
+         StripOnInput->False,
+         FontSize->12], 67], InsetBox[
+        StyleBox["\<\"\[FilledCircle]\"\>",
+         StripOnInput->False,
+         FontSize->12], 68], InsetBox[
+        StyleBox["\<\"\[FilledCircle]\"\>",
+         StripOnInput->False,
+         FontSize->12], 69], InsetBox[
+        StyleBox["\<\"\[FilledCircle]\"\>",
+         StripOnInput->False,
+         FontSize->12], 70]}, 
+      {RGBColor[0.6, 0.5470136627990908, 0.24], InsetBox[
+        StyleBox["\<\"\[FilledSquare]\"\>",
+         StripOnInput->False,
+         FontSize->12], 71], InsetBox[
+        StyleBox["\<\"\[FilledSquare]\"\>",
+         StripOnInput->False,
+         FontSize->12], 72], InsetBox[
+        StyleBox["\<\"\[FilledSquare]\"\>",
+         StripOnInput->False,
+         FontSize->12], 73], InsetBox[
+        StyleBox["\<\"\[FilledSquare]\"\>",
+         StripOnInput->False,
+         FontSize->12], 74], InsetBox[
+        StyleBox["\<\"\[FilledSquare]\"\>",
+         StripOnInput->False,
+         FontSize->12], 75], InsetBox[
+        StyleBox["\<\"\[FilledSquare]\"\>",
+         StripOnInput->False,
+         FontSize->12], 76], InsetBox[
+        StyleBox["\<\"\[FilledSquare]\"\>",
+         StripOnInput->False,
+         FontSize->12], 77], InsetBox[
+        StyleBox["\<\"\[FilledSquare]\"\>",
+         StripOnInput->False,
+         FontSize->12], 78], InsetBox[
+        StyleBox["\<\"\[FilledSquare]\"\>",
+         StripOnInput->False,
+         FontSize->12], 79], InsetBox[
+        StyleBox["\<\"\[FilledSquare]\"\>",
+         StripOnInput->False,
+         FontSize->12], 80], InsetBox[
+        StyleBox["\<\"\[FilledSquare]\"\>",
+         StripOnInput->False,
+         FontSize->12], 81]}, 
+      {RGBColor[0.6, 0.24, 0.4428931686004542], InsetBox[
+        StyleBox["\<\"\[FilledDiamond]\"\>",
+         StripOnInput->False,
+         FontSize->12], 82], InsetBox[
+        StyleBox["\<\"\[FilledDiamond]\"\>",
+         StripOnInput->False,
+         FontSize->12], 83], InsetBox[
+        StyleBox["\<\"\[FilledDiamond]\"\>",
+         StripOnInput->False,
+         FontSize->12], 84], InsetBox[
+        StyleBox["\<\"\[FilledDiamond]\"\>",
+         StripOnInput->False,
+         FontSize->12], 85], InsetBox[
+        StyleBox["\<\"\[FilledDiamond]\"\>",
+         StripOnInput->False,
+         FontSize->12], 86], InsetBox[
+        StyleBox["\<\"\[FilledDiamond]\"\>",
+         StripOnInput->False,
+         FontSize->12], 87], InsetBox[
+        StyleBox["\<\"\[FilledDiamond]\"\>",
+         StripOnInput->False,
+         FontSize->12], 88], InsetBox[
+        StyleBox["\<\"\[FilledDiamond]\"\>",
+         StripOnInput->False,
+         FontSize->12], 89], InsetBox[
+        StyleBox["\<\"\[FilledDiamond]\"\>",
+         StripOnInput->False,
+         FontSize->12], 90], InsetBox[
+        StyleBox["\<\"\[FilledDiamond]\"\>",
+         StripOnInput->False,
+         FontSize->12], 91], InsetBox[
+        StyleBox["\<\"\[FilledDiamond]\"\>",
+         StripOnInput->False,
+         FontSize->12], 92], InsetBox[
+        StyleBox["\<\"\[FilledDiamond]\"\>",
+         StripOnInput->False,
+         FontSize->12], 93], InsetBox[
+        StyleBox["\<\"\[FilledDiamond]\"\>",
+         StripOnInput->False,
+         FontSize->12], 94], InsetBox[
+        StyleBox["\<\"\[FilledDiamond]\"\>",
+         StripOnInput->False,
+         FontSize->12], 95], InsetBox[
+        StyleBox["\<\"\[FilledDiamond]\"\>",
+         StripOnInput->False,
+         FontSize->12], 96]}, 
+      {RGBColor[0.24720000000000014`, 0.24, 0.6], InsetBox[
+        StyleBox["\<\"\[FilledCircle]\"\>",
+         StripOnInput->False,
+         FontSize->24], 97], InsetBox[
+        StyleBox["\<\"\[FilledCircle]\"\>",
+         StripOnInput->False,
+         FontSize->24], 98]}, 
+      {RGBColor[0.6, 0.5470136627990908, 0.24], InsetBox[
+        StyleBox["\<\"\[FilledSquare]\"\>",
+         StripOnInput->False,
+         FontSize->24], 99], InsetBox[
+        StyleBox["\<\"\[FilledSquare]\"\>",
+         StripOnInput->False,
+         FontSize->24], 100]}, 
+      {RGBColor[0.6, 0.24, 0.4428931686004542], InsetBox[
+        StyleBox["\<\"\[FilledDiamond]\"\>",
+         StripOnInput->False,
+         FontSize->24], 101], InsetBox[
+        StyleBox["\<\"\[FilledDiamond]\"\>",
+         StripOnInput->False,
+         FontSize->24], 102]}, {}}], {}}, 
+   {RGBColor[0.24720000000000014`, 0.24, 0.6], Thickness[Large], 
+    Dashing[{Small, Small}], CircleBox[{0, 0}]}, 
+   {RGBColor[0.6, 0.5470136627990908, 0.24], Thickness[Large], 
+    Dashing[{Small, Small}], CircleBox[{2.5, 0}]}, 
+   {RGBColor[0.6, 0.24, 0.4428931686004542], Thickness[Large], 
+    Dashing[{Small, Small}], CircleBox[{1.25, 2.1650635094610964`}]}},
+  AspectRatio->0.8888888888888888,
+  Axes->None,
+  AxesOrigin->{0., 0.},
+  Method->{},
+  PlotLabel->FormBox[
+    StyleBox[
+    "\"d) failed ball recovery for three clusters\"", FontFamily -> "Futura", 
+     FontSize -> 17, 
+     RGBColor[
+      Rational[227, 256], 
+      Rational[29, 256], 
+      Rational[59, 128]], StripOnInput -> False], TraditionalForm],
+  PlotRange->All,
+  PlotRangeClipping->True,
+  PlotRangePadding->{{0.08537020000000001, 0.08537020000000001}, {
+   0.08079800000000001, 0.08079800000000001}}]], "Output",
+ CellChangeTimes->{{3.5864769824786177`*^9, 3.5864769893590937`*^9}, {
+   3.5864770301800833`*^9, 3.5864771134552107`*^9}, 3.586477151080707*^9, {
+   3.586479247283381*^9, 3.5864792641302233`*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"s2", "=", 
+  RowBox[{"Show", "[", 
+   RowBox[{
+    RowBox[{"ListPlot", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"successcluster21", ",", "successcluster22", ",", 
+        RowBox[{"{", 
+         RowBox[{"successclusters2medoids", "[", 
+          RowBox[{"[", "1", "]"}], "]"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"successclusters2medoids", "[", 
+          RowBox[{"[", "2", "]"}], "]"}], "}"}]}], "}"}], ",", " ", 
+      RowBox[{"PlotMarkers", "\[Rule]", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"\"\<\[FilledCircle]\>\"", ",", " ", "12"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"\"\<\[FilledSquare]\>\"", ",", "12"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"\"\<\[FilledCircle]\>\"", ",", "24"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"\"\<\[FilledSquare]\>\"", ",", "24"}], "}"}]}], "}"}]}], 
+      ",", " ", 
+      RowBox[{"PlotStyle", "\[Rule]", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"ColorData", "[", 
+          RowBox[{"1", ",", "1"}], "]"}], ",", 
+         RowBox[{"ColorData", "[", 
+          RowBox[{"1", ",", "3"}], "]"}]}], "}"}]}], ",", " ", 
+      RowBox[{"Axes", "\[Rule]", "None"}], ",", 
+      RowBox[{"Frame", "\[Rule]", "False"}], ",", 
+      RowBox[{"FrameStyle", "\[Rule]", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"Directive", "[", 
+          RowBox[{
+           RowBox[{"FontFamily", "->", "\"\<Futura\>\""}], ",", " ", 
+           RowBox[{"FontSize", "\[Rule]", "12"}], ",", "Black"}], "]"}], ",", 
+         " ", 
+         RowBox[{"Directive", "[", 
+          RowBox[{
+           RowBox[{"FontFamily", "->", "\"\<Futura\>\""}], ",", " ", 
+           RowBox[{"FontSize", "\[Rule]", "12"}]}], "]"}]}], " ", "}"}]}], 
+      ",", 
+      RowBox[{"PlotLabel", "\[Rule]", 
+       RowBox[{"Style", "[", 
+        RowBox[{"\"\<a) ball recovery for two clusters\>\"", ",", " ", 
+         RowBox[{"FontFamily", "->", "\"\<Futura\>\""}], ",", " ", 
+         RowBox[{"FontSize", "\[Rule]", "17"}], ",", 
+         RowBox[{"RGBColor", "[", 
+          RowBox[{
+           RowBox[{"227", "/", "256"}], ",", 
+           RowBox[{"29", "/", "256"}], ",", 
+           RowBox[{"118", "/", "256"}]}], "]"}]}], "]"}]}]}], "]"}], ",", 
+    RowBox[{"Graphics", "[", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"ColorData", "[", 
+        RowBox[{"1", ",", "1"}], "]"}], ",", "Dashed", ",", "Thick", ",", 
+       RowBox[{"Circle", "[", 
+        RowBox[{"{", 
+         RowBox[{"0", ",", "0"}], "}"}], "]"}]}], "}"}], "]"}], ",", " ", 
+    RowBox[{"Graphics", "[", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"ColorData", "[", 
+        RowBox[{"1", ",", "3"}], "]"}], ",", "Dashed", ",", "Thick", ",", 
+       RowBox[{"Circle", "[", 
+        RowBox[{"{", 
+         RowBox[{"2.5", ",", "0"}], "}"}], "]"}]}], "}"}], "]"}], ",", 
+    RowBox[{"PlotRange", "\[Rule]", "All"}], ",", " ", 
+    RowBox[{"AspectRatio", "\[Rule]", 
+     RowBox[{"2", "/", "4.5"}]}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.586461900087854*^9, 3.586462004342169*^9}, {
+  3.58646218099242*^9, 3.5864621817032127`*^9}, {3.586464813759344*^9, 
+  3.586464901397482*^9}, {3.586464938422225*^9, 3.586464956557027*^9}, {
+  3.586466338435466*^9, 3.586466415193795*^9}, {3.5864666682739964`*^9, 
+  3.586466685704832*^9}, {3.586466727377948*^9, 3.586466749001399*^9}, {
+  3.586466786816964*^9, 3.586466791690144*^9}, {3.586466839337708*^9, 
+  3.586466844152916*^9}, {3.5864681237243013`*^9, 3.5864681450831738`*^9}, {
+  3.586468888540313*^9, 3.5864688894603*^9}, {3.5864768821918907`*^9, 
+  3.586476883641376*^9}, {3.5864771964042397`*^9, 3.586477197995002*^9}, {
+  3.587468017764049*^9, 3.5874680257395887`*^9}, {3.587468153221663*^9, 
+  3.587468214536108*^9}}],
+
+Cell[BoxData[
+ GraphicsBox[{{{}, GraphicsComplexBox[CompressedData["
+1:eJxTTMoPSmViYGBwAWIQLRpUF/T28l37n55b/Y8nP7JvFq9lzTx2yl76q0Dv
+O4U3+y9sjvy689ah/R1zNUvikrfvX7L0U1nL5ef7VzBInF+w8OH+hftS/aYf
+fbrfTe3BdQ+hNfb35N+HagvfsuczOnki8sbF/Vxzr99QXXXRXkTpgcCqK6/2
+/z+fuG8Pw8v9ZzSmRUfxXrVvelb8rmzvFnsPsANu2tdwNXzkkbpmH7jA/4nn
+pZv7NyUrC6x//XT/yvaMEvaNl+1Dlxy64TThwX5m57DtVX7P9n9YfszbvPOx
+ffZHTYZjxk/2X79rc1XR/OX+b+/6v6+a+mD/06uWbCnrL9uf1pOIKXbfvH9F
++CmjI4aMDnLLX3jo/b+4P3iaYl/pR06HrG8O2gYpT+y53VRLmWYxOxQW7XcO
+XHDcvk7WIt0lk80hVNjlLrvCy/0e+2tlLZ6zOXyOnMdenn5///opqR3Jd1kd
+dK7Meia7/JF9TkXVUp3DLA6LJ1kx+ra8sf/cF1yiIs7pEB2vsuVpzOP96ofa
+loef+mOv9vt55gGFjft1UiUfRUzncmA92m9Yrnt1f1SK9X3/XjaHTFOVdxu/
+vLbnlJ4Xp3n6rz0knu7vh5jL4bDp+m77e6uf2jNMrPttVcDpwBkQfPrar2v7
+VyWEBKkv4HJQFj0m1iRzwx49/tD56P5F54+mj9H0gS99AAC4sR9g
+     "], {
+      {RGBColor[0.24720000000000014`, 0.24, 0.6], InsetBox[
+        StyleBox["\<\"\[FilledCircle]\"\>",
+         StripOnInput->False,
+         FontSize->12], 35], InsetBox[
+        StyleBox["\<\"\[FilledCircle]\"\>",
+         StripOnInput->False,
+         FontSize->12], 36], InsetBox[
+        StyleBox["\<\"\[FilledCircle]\"\>",
+         StripOnInput->False,
+         FontSize->12], 37], InsetBox[
+        StyleBox["\<\"\[FilledCircle]\"\>",
+         StripOnInput->False,
+         FontSize->12], 38], InsetBox[
+        StyleBox["\<\"\[FilledCircle]\"\>",
+         StripOnInput->False,
+         FontSize->12], 39], InsetBox[
+        StyleBox["\<\"\[FilledCircle]\"\>",
+         StripOnInput->False,
+         FontSize->12], 40], InsetBox[
+        StyleBox["\<\"\[FilledCircle]\"\>",
+         StripOnInput->False,
+         FontSize->12], 41], InsetBox[
+        StyleBox["\<\"\[FilledCircle]\"\>",
+         StripOnInput->False,
+         FontSize->12], 42], InsetBox[
+        StyleBox["\<\"\[FilledCircle]\"\>",
+         StripOnInput->False,
+         FontSize->12], 43], InsetBox[
+        StyleBox["\<\"\[FilledCircle]\"\>",
+         StripOnInput->False,
+         FontSize->12], 44], InsetBox[
+        StyleBox["\<\"\[FilledCircle]\"\>",
+         StripOnInput->False,
+         FontSize->12], 45], InsetBox[
+        StyleBox["\<\"\[FilledCircle]\"\>",
+         StripOnInput->False,
+         FontSize->12], 46], InsetBox[
+        StyleBox["\<\"\[FilledCircle]\"\>",
+         StripOnInput->False,
+         FontSize->12], 47], InsetBox[
+        StyleBox["\<\"\[FilledCircle]\"\>",
+         StripOnInput->False,
+         FontSize->12], 48], InsetBox[
+        StyleBox["\<\"\[FilledCircle]\"\>",
+         StripOnInput->False,
+         FontSize->12], 49]}, 
+      {RGBColor[0.6, 0.5470136627990908, 0.24], InsetBox[
+        StyleBox["\<\"\[FilledSquare]\"\>",
+         StripOnInput->False,
+         FontSize->12], 50], InsetBox[
+        StyleBox["\<\"\[FilledSquare]\"\>",
+         StripOnInput->False,
+         FontSize->12], 51], InsetBox[
+        StyleBox["\<\"\[FilledSquare]\"\>",
+         StripOnInput->False,
+         FontSize->12], 52], InsetBox[
+        StyleBox["\<\"\[FilledSquare]\"\>",
+         StripOnInput->False,
+         FontSize->12], 53], InsetBox[
+        StyleBox["\<\"\[FilledSquare]\"\>",
+         StripOnInput->False,
+         FontSize->12], 54], InsetBox[
+        StyleBox["\<\"\[FilledSquare]\"\>",
+         StripOnInput->False,
+         FontSize->12], 55], InsetBox[
+        StyleBox["\<\"\[FilledSquare]\"\>",
+         StripOnInput->False,
+         FontSize->12], 56], InsetBox[
+        StyleBox["\<\"\[FilledSquare]\"\>",
+         StripOnInput->False,
+         FontSize->12], 57], InsetBox[
+        StyleBox["\<\"\[FilledSquare]\"\>",
+         StripOnInput->False,
+         FontSize->12], 58], InsetBox[
+        StyleBox["\<\"\[FilledSquare]\"\>",
+         StripOnInput->False,
+         FontSize->12], 59], InsetBox[
+        StyleBox["\<\"\[FilledSquare]\"\>",
+         StripOnInput->False,
+         FontSize->12], 60], InsetBox[
+        StyleBox["\<\"\[FilledSquare]\"\>",
+         StripOnInput->False,
+         FontSize->12], 61], InsetBox[
+        StyleBox["\<\"\[FilledSquare]\"\>",
+         StripOnInput->False,
+         FontSize->12], 62], InsetBox[
+        StyleBox["\<\"\[FilledSquare]\"\>",
+         StripOnInput->False,
+         FontSize->12], 63], InsetBox[
+        StyleBox["\<\"\[FilledSquare]\"\>",
+         StripOnInput->False,
+         FontSize->12], 64]}, 
+      {RGBColor[0.24720000000000014`, 0.24, 0.6], InsetBox[
+        StyleBox["\<\"\[FilledCircle]\"\>",
+         StripOnInput->False,
+         FontSize->24], 65], InsetBox[
+        StyleBox["\<\"\[FilledCircle]\"\>",
+         StripOnInput->False,
+         FontSize->24], 66]}, 
+      {RGBColor[0.6, 0.5470136627990908, 0.24], InsetBox[
+        StyleBox["\<\"\[FilledSquare]\"\>",
+         StripOnInput->False,
+         FontSize->24], 67], InsetBox[
+        StyleBox["\<\"\[FilledSquare]\"\>",
+         StripOnInput->False,
+         FontSize->24], 68]}, {}}], {}}, 
+   {RGBColor[0.24720000000000014`, 0.24, 0.6], Thickness[Large], 
+    Dashing[{Small, Small}], CircleBox[{0, 0}]}, 
+   {RGBColor[0.6, 0.5470136627990908, 0.24], Thickness[Large], 
+    Dashing[{Small, Small}], CircleBox[{2.5, 0}]}},
+  AspectRatio->0.4444444444444444,
+  Axes->None,
+  AxesOrigin->{0., 0.},
+  FrameStyle->{
+    Directive[FontFamily -> "Futura", FontSize -> 12, 
+     GrayLevel[0]], 
+    Directive[FontFamily -> "Futura", FontSize -> 12]},
+  Method->{},
+  PlotLabel->FormBox[
+    StyleBox[
+    "\"a) ball recovery for two clusters\"", FontFamily -> "Futura", FontSize -> 
+     17, 
+     RGBColor[
+      Rational[227, 256], 
+      Rational[29, 256], 
+      Rational[59, 128]], StripOnInput -> False], TraditionalForm],
+  PlotRange->All,
+  PlotRangeClipping->True,
+  PlotRangePadding->{{0.0823236, 0.0823236}, {0.0354034, 
+   0.0354034}}]], "Output",
+ CellChangeTimes->{
+  3.586466415647946*^9, {3.586466681315628*^9, 3.586466686071583*^9}, {
+   3.5864667278953543`*^9, 3.586466749234601*^9}, 3.586466812155431*^9, 
+   3.586466844453629*^9, {3.5864681365537443`*^9, 3.586468145536669*^9}, 
+   3.586468897713771*^9, 3.586476884437845*^9, 3.586477198365399*^9, {
+   3.586479247382935*^9, 3.5864792641735764`*^9}, {3.587468018192957*^9, 
+   3.587468026189994*^9}, {3.587468153598563*^9, 3.587468214738462*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"f2", "=", 
+  RowBox[{"Show", "[", 
+   RowBox[{
+    RowBox[{"ListPlot", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"failcluster21", ",", "failcluster22", ",", 
+        RowBox[{"{", 
+         RowBox[{"failclusters2medoids", "[", 
+          RowBox[{"[", "1", "]"}], "]"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"failclusters2medoids", "[", 
+          RowBox[{"[", "2", "]"}], "]"}], "}"}]}], "}"}], ",", " ", 
+      RowBox[{"PlotMarkers", "\[Rule]", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"\"\<\[FilledCircle]\>\"", ",", " ", "12"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"\"\<\[FilledSquare]\>\"", ",", "12"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"\"\<\[FilledCircle]\>\"", ",", "24"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"\"\<\[FilledSquare]\>\"", ",", "24"}], "}"}]}], "}"}]}], 
+      ",", 
+      RowBox[{"FrameStyle", "\[Rule]", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"Directive", "[", 
+          RowBox[{
+           RowBox[{"FontFamily", "->", "\"\<Futura\>\""}], ",", " ", 
+           RowBox[{"FontSize", "\[Rule]", "12"}], ",", "Black"}], "]"}], ",", 
+         " ", 
+         RowBox[{"Directive", "[", 
+          RowBox[{
+           RowBox[{"FontFamily", "->", "\"\<Futura\>\""}], ",", " ", 
+           RowBox[{"FontSize", "\[Rule]", "12"}]}], "]"}]}], " ", "}"}]}], 
+      ",", 
+      RowBox[{"PlotStyle", "\[Rule]", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"ColorData", "[", 
+          RowBox[{"1", ",", "1"}], "]"}], ",", 
+         RowBox[{"ColorData", "[", 
+          RowBox[{"1", ",", "3"}], "]"}]}], "}"}]}], ",", " ", 
+      RowBox[{"Axes", "\[Rule]", "None"}], ",", 
+      RowBox[{"Frame", "\[Rule]", "False"}]}], "]"}], ",", 
+    RowBox[{"Graphics", "[", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"ColorData", "[", 
+        RowBox[{"1", ",", "1"}], "]"}], ",", "Dashed", ",", "Thick", ",", 
+       RowBox[{"Circle", "[", 
+        RowBox[{"{", 
+         RowBox[{"0", ",", "0"}], "}"}], "]"}]}], "}"}], "]"}], ",", " ", 
+    RowBox[{"Graphics", "[", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"ColorData", "[", 
+        RowBox[{"1", ",", "3"}], "]"}], ",", "Dashed", ",", "Thick", ",", 
+       RowBox[{"Circle", "[", 
+        RowBox[{"{", 
+         RowBox[{"2.5", ",", "0"}], "}"}], "]"}]}], "}"}], "]"}], ",", 
+    RowBox[{"PlotRange", "\[Rule]", "All"}], ",", " ", 
+    RowBox[{"AspectRatio", "\[Rule]", 
+     RowBox[{"2", "/", "4.5"}]}], ",", " ", 
+    RowBox[{"PlotLabel", "\[Rule]", 
+     RowBox[{"Style", "[", 
+      RowBox[{"\"\<b) failed ball recovery for two clusters\>\"", ",", " ", 
+       RowBox[{"FontFamily", "->", "\"\<Futura\>\""}], ",", " ", 
+       RowBox[{"FontSize", "\[Rule]", "17"}], ",", 
+       RowBox[{"RGBColor", "[", 
+        RowBox[{
+         RowBox[{"227", "/", "256"}], ",", 
+         RowBox[{"29", "/", "256"}], ",", 
+         RowBox[{"118", "/", "256"}]}], "]"}]}], "]"}]}]}], "]"}]}]], "Input",\
+
+ CellChangeTimes->{{3.5864621102895412`*^9, 3.58646212173736*^9}, {
+  3.586462183840563*^9, 3.586462200360372*^9}, {3.586464999710162*^9, 
+  3.5864650192690973`*^9}, {3.586466564953218*^9, 3.5864665915209084`*^9}, {
+  3.586466756489993*^9, 3.586466800496966*^9}, {3.5864668362273912`*^9, 
+  3.586466854393035*^9}, {3.58646786632311*^9, 3.586467886738111*^9}, {
+  3.586468891860627*^9, 3.5864688922440853`*^9}, {3.586476795276086*^9, 
+  3.586476811764979*^9}, {3.586476844836617*^9, 3.5864768681396713`*^9}, {
+  3.586477239012101*^9, 3.5864772394837008`*^9}, {3.587468041428195*^9, 
+  3.58746805633713*^9}, {3.58746817626537*^9, 3.587468183984146*^9}, {
+  3.587468224618577*^9, 3.587468224678385*^9}}],
+
+Cell[BoxData[
+ GraphicsBox[{{{}, GraphicsComplexBox[CompressedData["
+1:eJxTTMoPSmViYGBwAWIQnXrcTSHu+oP9/nJiWb6fX+yXqUk0CjW4YD/v0sFf
+9u2v9wuwzavmn75n/wbm5z0aby/bN6Qu9dR8cWG/69drB8I479hnmqq82/jl
+hb2re9FP/pf394e23+Exf3Bzv32QS1vontf7QbILuS/sP7+33bvP+qb95s0v
+5nLtmL6fv7Zc27tk3f5Ci8+rLR1u2dcFNv1z6u/Y/9u+/ecnpqf7m8ISTrwK
+O7+/dtrzg3cjH+933D7dxO31if2tTiwyTlMP2Qurf7cWYX1rH3FUeqb7vwP7
+FzvMPzF5ye79Z9c/Yzgo83p/mshp3bVtF+w/bU2fxrLinf33uaLsbUmN9vEz
+fER7vH7bny2Vyly559H+uQ1qh9qW/7Yv+9t0d0PuTfsLmyO/7rz13/55UEzo
+t9ij+2c/k13+4gSLQ+7/U16Tg+7s/9v+5fZ1RjYHv6r7P24Z794/kb/KbPU+
+bofXli9rH2cftr+rwtY41fm3/ZJVnIveMT+wtw+P3rj/zU/7Z8xMcz1nr7Kf
+mtqRHHuHyeGfh6Bk2MfX+/fzzTFetOW/vZ7luyl81+7bL+NyUy1l+meva8d6
+oILt6v6Dpxa6bitmd3j1JqVgyp5X9hGWW06U7WN02BDadPThmZv24h4BfySK
+2RxebZpxoybmtn3PzmzOnwqsDlkSdkrLXM7tRw8fdD66f9H5o+ljNH3gSx8A
+UVlI/A==
+     "], {
+      {RGBColor[0.24720000000000014`, 0.24, 0.6], InsetBox[
+        StyleBox["\<\"\[FilledCircle]\"\>",
+         StripOnInput->False,
+         FontSize->12], 35], InsetBox[
+        StyleBox["\<\"\[FilledCircle]\"\>",
+         StripOnInput->False,
+         FontSize->12], 36], InsetBox[
+        StyleBox["\<\"\[FilledCircle]\"\>",
+         StripOnInput->False,
+         FontSize->12], 37], InsetBox[
+        StyleBox["\<\"\[FilledCircle]\"\>",
+         StripOnInput->False,
+         FontSize->12], 38], InsetBox[
+        StyleBox["\<\"\[FilledCircle]\"\>",
+         StripOnInput->False,
+         FontSize->12], 39], InsetBox[
+        StyleBox["\<\"\[FilledCircle]\"\>",
+         StripOnInput->False,
+         FontSize->12], 40], InsetBox[
+        StyleBox["\<\"\[FilledCircle]\"\>",
+         StripOnInput->False,
+         FontSize->12], 41], InsetBox[
+        StyleBox["\<\"\[FilledCircle]\"\>",
+         StripOnInput->False,
+         FontSize->12], 42], InsetBox[
+        StyleBox["\<\"\[FilledCircle]\"\>",
+         StripOnInput->False,
+         FontSize->12], 43], InsetBox[
+        StyleBox["\<\"\[FilledCircle]\"\>",
+         StripOnInput->False,
+         FontSize->12], 44], InsetBox[
+        StyleBox["\<\"\[FilledCircle]\"\>",
+         StripOnInput->False,
+         FontSize->12], 45], InsetBox[
+        StyleBox["\<\"\[FilledCircle]\"\>",
+         StripOnInput->False,
+         FontSize->12], 46], InsetBox[
+        StyleBox["\<\"\[FilledCircle]\"\>",
+         StripOnInput->False,
+         FontSize->12], 47], InsetBox[
+        StyleBox["\<\"\[FilledCircle]\"\>",
+         StripOnInput->False,
+         FontSize->12], 48]}, 
+      {RGBColor[0.6, 0.5470136627990908, 0.24], InsetBox[
+        StyleBox["\<\"\[FilledSquare]\"\>",
+         StripOnInput->False,
+         FontSize->12], 49], InsetBox[
+        StyleBox["\<\"\[FilledSquare]\"\>",
+         StripOnInput->False,
+         FontSize->12], 50], InsetBox[
+        StyleBox["\<\"\[FilledSquare]\"\>",
+         StripOnInput->False,
+         FontSize->12], 51], InsetBox[
+        StyleBox["\<\"\[FilledSquare]\"\>",
+         StripOnInput->False,
+         FontSize->12], 52], InsetBox[
+        StyleBox["\<\"\[FilledSquare]\"\>",
+         StripOnInput->False,
+         FontSize->12], 53], InsetBox[
+        StyleBox["\<\"\[FilledSquare]\"\>",
+         StripOnInput->False,
+         FontSize->12], 54], InsetBox[
+        StyleBox["\<\"\[FilledSquare]\"\>",
+         StripOnInput->False,
+         FontSize->12], 55], InsetBox[
+        StyleBox["\<\"\[FilledSquare]\"\>",
+         StripOnInput->False,
+         FontSize->12], 56], InsetBox[
+        StyleBox["\<\"\[FilledSquare]\"\>",
+         StripOnInput->False,
+         FontSize->12], 57], InsetBox[
+        StyleBox["\<\"\[FilledSquare]\"\>",
+         StripOnInput->False,
+         FontSize->12], 58], InsetBox[
+        StyleBox["\<\"\[FilledSquare]\"\>",
+         StripOnInput->False,
+         FontSize->12], 59], InsetBox[
+        StyleBox["\<\"\[FilledSquare]\"\>",
+         StripOnInput->False,
+         FontSize->12], 60], InsetBox[
+        StyleBox["\<\"\[FilledSquare]\"\>",
+         StripOnInput->False,
+         FontSize->12], 61], InsetBox[
+        StyleBox["\<\"\[FilledSquare]\"\>",
+         StripOnInput->False,
+         FontSize->12], 62], InsetBox[
+        StyleBox["\<\"\[FilledSquare]\"\>",
+         StripOnInput->False,
+         FontSize->12], 63], InsetBox[
+        StyleBox["\<\"\[FilledSquare]\"\>",
+         StripOnInput->False,
+         FontSize->12], 64]}, 
+      {RGBColor[0.24720000000000014`, 0.24, 0.6], InsetBox[
+        StyleBox["\<\"\[FilledCircle]\"\>",
+         StripOnInput->False,
+         FontSize->24], 65], InsetBox[
+        StyleBox["\<\"\[FilledCircle]\"\>",
+         StripOnInput->False,
+         FontSize->24], 66]}, 
+      {RGBColor[0.6, 0.5470136627990908, 0.24], InsetBox[
+        StyleBox["\<\"\[FilledSquare]\"\>",
+         StripOnInput->False,
+         FontSize->24], 67], InsetBox[
+        StyleBox["\<\"\[FilledSquare]\"\>",
+         StripOnInput->False,
+         FontSize->24], 68]}, {}}], {}}, 
+   {RGBColor[0.24720000000000014`, 0.24, 0.6], Thickness[Large], 
+    Dashing[{Small, Small}], CircleBox[{0, 0}]}, 
+   {RGBColor[0.6, 0.5470136627990908, 0.24], Thickness[Large], 
+    Dashing[{Small, Small}], CircleBox[{2.5, 0}]}},
+  AspectRatio->0.4444444444444444,
+  Axes->None,
+  AxesOrigin->{0., 0.},
+  FrameStyle->{
+    Directive[FontFamily -> "Futura", FontSize -> 12, 
+     GrayLevel[0]], 
+    Directive[FontFamily -> "Futura", FontSize -> 12]},
+  Method->{},
+  PlotLabel->FormBox[
+    StyleBox[
+    "\"b) failed ball recovery for two clusters\"", FontFamily -> "Futura", 
+     FontSize -> 17, 
+     RGBColor[
+      Rational[227, 256], 
+      Rational[29, 256], 
+      Rational[59, 128]], StripOnInput -> False], TraditionalForm],
+  PlotRange->All,
+  PlotRangeClipping->True,
+  PlotRangePadding->{{0.0863072, 0.0863072}, {0.0356016, 
+   0.0356016}}]], "Output",
+ CellChangeTimes->{
+  3.5864621222898417`*^9, {3.586462197273316*^9, 3.586462200724511*^9}, {
+   3.586465009501997*^9, 3.5864650195045853`*^9}, {3.586466565826627*^9, 
+   3.5864665917597933`*^9}, 3.5864667660797033`*^9, 3.5864668009318333`*^9, {
+   3.586466848926464*^9, 3.5864668547530622`*^9}, {3.586467867601153*^9, 
+   3.586467887213078*^9}, 3.586468897757485*^9, 3.586476821120336*^9, {
+   3.586476854168397*^9, 3.586476868782879*^9}, 3.586477239761416*^9, {
+   3.58647924748734*^9, 3.586479264211575*^9}, {3.587468041771022*^9, 
+   3.587468056627652*^9}, {3.587468176769946*^9, 3.587468184187743*^9}, 
+   3.5874682250211363`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"plottop", "=", 
+  RowBox[{"GraphicsGrid", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"{", 
+      RowBox[{"s2", ",", "f2"}], "}"}], "}"}], ",", " ", 
+    RowBox[{"ImageSize", "\[Rule]", 
+     RowBox[{"{", 
+      RowBox[{"700", ",", "234"}], "}"}]}], ",", 
+    RowBox[{"PlotLabel", "\[Rule]", 
+     RowBox[{"Style", "[", 
+      RowBox[{
+       RowBox[{"Grid", "[", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{
+          "{", "\"\<successful and failed 2-ball recoveries for R = 2.5\>\"", 
+           "}"}], ",", 
+          RowBox[{
+          "{", "\"\<n = 15 points drawn from each ball (dashed) are \
+independent samples of uniform distribution\>\"", "}"}], ",", " ", 
+          RowBox[{
+          "{", "\"\<points in same cluster have same marker and color; \
+medoids are large points\>\"", "}"}]}], "}"}], "]"}], ",", "15", ",", " ", 
+       RowBox[{"FontFamily", "\[Rule]", "\"\<Futura\>\""}]}], "]"}]}], ",", 
+    " ", 
+    RowBox[{"Dividers", "\[Rule]", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"False", ",", " ", 
+         RowBox[{"Directive", "[", 
+          RowBox[{"Dashed", ",", 
+           RowBox[{"RGBColor", "[", 
+            RowBox[{
+             RowBox[{"227", "/", "256"}], ",", 
+             RowBox[{"29", "/", "256"}], ",", 
+             RowBox[{"118", "/", "256"}]}], "]"}]}], "]"}], ",", " ", 
+         "False"}], "}"}], ",", " ", 
+       RowBox[{"{", 
+        RowBox[{"False", ",", "False"}], "}"}]}], "}"}]}]}], "]"}]}]], "Input",\
+
+ CellChangeTimes->{{3.5864682854892683`*^9, 3.586468300040263*^9}, {
+   3.5864683371202497`*^9, 3.586468392945427*^9}, {3.586468686387692*^9, 
+   3.58646871720992*^9}, {3.586468785331614*^9, 3.586468822634544*^9}, {
+   3.586468903899289*^9, 3.5864689050260153`*^9}, {3.586468942856329*^9, 
+   3.586468951911578*^9}, {3.5864689975361547`*^9, 3.586469004569413*^9}, {
+   3.5864740300922203`*^9, 3.586474171708338*^9}, {3.586474201798636*^9, 
+   3.5864743474311447`*^9}, {3.586475731481945*^9, 3.586475734882132*^9}, {
+   3.586477796458919*^9, 3.5864778311702347`*^9}, {3.586477918298071*^9, 
+   3.5864779188181953`*^9}, {3.586477992716586*^9, 3.586477995132362*^9}, {
+   3.58647804171931*^9, 3.586478104621606*^9}, 3.586478145996602*^9, {
+   3.586510385796688*^9, 3.586510484698636*^9}, {3.587146497399803*^9, 
+   3.5871464978141003`*^9}}],
+
+Cell[BoxData[
+ GraphicsBox[{{}, {InsetBox[
+     GraphicsBox[{{{}, GraphicsComplexBox[CompressedData["
+1:eJxTTMoPSmViYGBwAWIQLRpUF/T28l37n55b/Y8nP7JvFq9lzTx2yl76q0Dv
+O4U3+y9sjvy689ah/R1zNUvikrfvX7L0U1nL5ef7VzBInF+w8OH+hftS/aYf
+fbrfTe3BdQ+hNfb35N+HagvfsuczOnki8sbF/Vxzr99QXXXRXkTpgcCqK6/2
+/z+fuG8Pw8v9ZzSmRUfxXrVvelb8rmzvFnsPsANu2tdwNXzkkbpmH7jA/4nn
+pZv7NyUrC6x//XT/yvaMEvaNl+1Dlxy64TThwX5m57DtVX7P9n9YfszbvPOx
+ffZHTYZjxk/2X79rc1XR/OX+b+/6v6+a+mD/06uWbCnrL9uf1pOIKXbfvH9F
++CmjI4aMDnLLX3jo/b+4P3iaYl/pR06HrG8O2gYpT+y53VRLmWYxOxQW7XcO
+XHDcvk7WIt0lk80hVNjlLrvCy/0e+2tlLZ6zOXyOnMdenn5///opqR3Jd1kd
+dK7Meia7/JF9TkXVUp3DLA6LJ1kx+ra8sf/cF1yiIs7pEB2vsuVpzOP96ofa
+loef+mOv9vt55gGFjft1UiUfRUzncmA92m9Yrnt1f1SK9X3/XjaHTFOVdxu/
+vLbnlJ4Xp3n6rz0knu7vh5jL4bDp+m77e6uf2jNMrPttVcDpwBkQfPrar2v7
+VyWEBKkv4HJQFj0m1iRzwx49/tD56P5F54+mj9H0gS99AAC4sR9g
+         "], {
+          {RGBColor[0.24720000000000014`, 0.24, 0.6], InsetBox[
+            StyleBox["\<\"\[FilledCircle]\"\>",
+             StripOnInput->False,
+             FontSize->12], 35], InsetBox[
+            StyleBox["\<\"\[FilledCircle]\"\>",
+             StripOnInput->False,
+             FontSize->12], 36], InsetBox[
+            StyleBox["\<\"\[FilledCircle]\"\>",
+             StripOnInput->False,
+             FontSize->12], 37], InsetBox[
+            StyleBox["\<\"\[FilledCircle]\"\>",
+             StripOnInput->False,
+             FontSize->12], 38], InsetBox[
+            StyleBox["\<\"\[FilledCircle]\"\>",
+             StripOnInput->False,
+             FontSize->12], 39], InsetBox[
+            StyleBox["\<\"\[FilledCircle]\"\>",
+             StripOnInput->False,
+             FontSize->12], 40], InsetBox[
+            StyleBox["\<\"\[FilledCircle]\"\>",
+             StripOnInput->False,
+             FontSize->12], 41], InsetBox[
+            StyleBox["\<\"\[FilledCircle]\"\>",
+             StripOnInput->False,
+             FontSize->12], 42], InsetBox[
+            StyleBox["\<\"\[FilledCircle]\"\>",
+             StripOnInput->False,
+             FontSize->12], 43], InsetBox[
+            StyleBox["\<\"\[FilledCircle]\"\>",
+             StripOnInput->False,
+             FontSize->12], 44], InsetBox[
+            StyleBox["\<\"\[FilledCircle]\"\>",
+             StripOnInput->False,
+             FontSize->12], 45], InsetBox[
+            StyleBox["\<\"\[FilledCircle]\"\>",
+             StripOnInput->False,
+             FontSize->12], 46], InsetBox[
+            StyleBox["\<\"\[FilledCircle]\"\>",
+             StripOnInput->False,
+             FontSize->12], 47], InsetBox[
+            StyleBox["\<\"\[FilledCircle]\"\>",
+             StripOnInput->False,
+             FontSize->12], 48], InsetBox[
+            StyleBox["\<\"\[FilledCircle]\"\>",
+             StripOnInput->False,
+             FontSize->12], 49]}, 
+          {RGBColor[0.6, 0.5470136627990908, 0.24], InsetBox[
+            StyleBox["\<\"\[FilledSquare]\"\>",
+             StripOnInput->False,
+             FontSize->12], 50], InsetBox[
+            StyleBox["\<\"\[FilledSquare]\"\>",
+             StripOnInput->False,
+             FontSize->12], 51], InsetBox[
+            StyleBox["\<\"\[FilledSquare]\"\>",
+             StripOnInput->False,
+             FontSize->12], 52], InsetBox[
+            StyleBox["\<\"\[FilledSquare]\"\>",
+             StripOnInput->False,
+             FontSize->12], 53], InsetBox[
+            StyleBox["\<\"\[FilledSquare]\"\>",
+             StripOnInput->False,
+             FontSize->12], 54], InsetBox[
+            StyleBox["\<\"\[FilledSquare]\"\>",
+             StripOnInput->False,
+             FontSize->12], 55], InsetBox[
+            StyleBox["\<\"\[FilledSquare]\"\>",
+             StripOnInput->False,
+             FontSize->12], 56], InsetBox[
+            StyleBox["\<\"\[FilledSquare]\"\>",
+             StripOnInput->False,
+             FontSize->12], 57], InsetBox[
+            StyleBox["\<\"\[FilledSquare]\"\>",
+             StripOnInput->False,
+             FontSize->12], 58], InsetBox[
+            StyleBox["\<\"\[FilledSquare]\"\>",
+             StripOnInput->False,
+             FontSize->12], 59], InsetBox[
+            StyleBox["\<\"\[FilledSquare]\"\>",
+             StripOnInput->False,
+             FontSize->12], 60], InsetBox[
+            StyleBox["\<\"\[FilledSquare]\"\>",
+             StripOnInput->False,
+             FontSize->12], 61], InsetBox[
+            StyleBox["\<\"\[FilledSquare]\"\>",
+             StripOnInput->False,
+             FontSize->12], 62], InsetBox[
+            StyleBox["\<\"\[FilledSquare]\"\>",
+             StripOnInput->False,
+             FontSize->12], 63], InsetBox[
+            StyleBox["\<\"\[FilledSquare]\"\>",
+             StripOnInput->False,
+             FontSize->12], 64]}, 
+          {RGBColor[0.24720000000000014`, 0.24, 0.6], InsetBox[
+            StyleBox["\<\"\[FilledCircle]\"\>",
+             StripOnInput->False,
+             FontSize->24], 65], InsetBox[
+            StyleBox["\<\"\[FilledCircle]\"\>",
+             StripOnInput->False,
+             FontSize->24], 66]}, 
+          {RGBColor[0.6, 0.5470136627990908, 0.24], InsetBox[
+            StyleBox["\<\"\[FilledSquare]\"\>",
+             StripOnInput->False,
+             FontSize->24], 67], InsetBox[
+            StyleBox["\<\"\[FilledSquare]\"\>",
+             StripOnInput->False,
+             FontSize->24], 68]}, {}}], {}}, 
+       {RGBColor[0.24720000000000014`, 0.24, 0.6], Thickness[Large], 
+        Dashing[{Small, Small}], CircleBox[{0, 0}]}, 
+       {RGBColor[0.6, 0.5470136627990908, 0.24], Thickness[Large], 
+        Dashing[{Small, Small}], CircleBox[{2.5, 0}]}},
+      AspectRatio->0.4444444444444444,
+      Axes->None,
+      AxesOrigin->{0., 0.},
+      FrameStyle->{
+        Directive[FontFamily -> "Futura", FontSize -> 12, 
+         GrayLevel[0]], 
+        Directive[FontFamily -> "Futura", FontSize -> 12]},
+      Method->{},
+      PlotLabel->FormBox[
+        StyleBox[
+        "\"a) ball recovery for two clusters\"", FontFamily -> "Futura", 
+         FontSize -> 17, 
+         RGBColor[
+          Rational[227, 256], 
+          Rational[29, 256], 
+          Rational[59, 128]], StripOnInput -> False], TraditionalForm],
+      PlotRange->All,
+      PlotRangeClipping->True,
+      PlotRangePadding->{{0.0823236, 0.0823236}, {0.0354034, 0.0354034}}], {192., -84.},
+      ImageScaled[{0.5, 0.5}], {360., 160.}], InsetBox[
+     GraphicsBox[{{{}, GraphicsComplexBox[CompressedData["
+1:eJxTTMoPSmViYGBwAWIQnXrcTSHu+oP9/nJiWb6fX+yXqUk0CjW4YD/v0sFf
+9u2v9wuwzavmn75n/wbm5z0aby/bN6Qu9dR8cWG/69drB8I479hnmqq82/jl
+hb2re9FP/pf394e23+Exf3Bzv32QS1vontf7QbILuS/sP7+33bvP+qb95s0v
+5nLtmL6fv7Zc27tk3f5Ci8+rLR1u2dcFNv1z6u/Y/9u+/ecnpqf7m8ISTrwK
+O7+/dtrzg3cjH+933D7dxO31if2tTiwyTlMP2Qurf7cWYX1rH3FUeqb7vwP7
+FzvMPzF5ye79Z9c/Yzgo83p/mshp3bVtF+w/bU2fxrLinf33uaLsbUmN9vEz
+fER7vH7bny2Vyly559H+uQ1qh9qW/7Yv+9t0d0PuTfsLmyO/7rz13/55UEzo
+t9ij+2c/k13+4gSLQ+7/U16Tg+7s/9v+5fZ1RjYHv6r7P24Z794/kb/KbPU+
+bofXli9rH2cftr+rwtY41fm3/ZJVnIveMT+wtw+P3rj/zU/7Z8xMcz1nr7Kf
+mtqRHHuHyeGfh6Bk2MfX+/fzzTFetOW/vZ7luyl81+7bL+NyUy1l+meva8d6
+oILt6v6Dpxa6bitmd3j1JqVgyp5X9hGWW06U7WN02BDadPThmZv24h4BfySK
+2RxebZpxoybmtn3PzmzOnwqsDlkSdkrLXM7tRw8fdD66f9H5o+ljNH3gSx8A
+UVlI/A==
+         "], {
+          {RGBColor[0.24720000000000014`, 0.24, 0.6], InsetBox[
+            StyleBox["\<\"\[FilledCircle]\"\>",
+             StripOnInput->False,
+             FontSize->12], 35], InsetBox[
+            StyleBox["\<\"\[FilledCircle]\"\>",
+             StripOnInput->False,
+             FontSize->12], 36], InsetBox[
+            StyleBox["\<\"\[FilledCircle]\"\>",
+             StripOnInput->False,
+             FontSize->12], 37], InsetBox[
+            StyleBox["\<\"\[FilledCircle]\"\>",
+             StripOnInput->False,
+             FontSize->12], 38], InsetBox[
+            StyleBox["\<\"\[FilledCircle]\"\>",
+             StripOnInput->False,
+             FontSize->12], 39], InsetBox[
+            StyleBox["\<\"\[FilledCircle]\"\>",
+             StripOnInput->False,
+             FontSize->12], 40], InsetBox[
+            StyleBox["\<\"\[FilledCircle]\"\>",
+             StripOnInput->False,
+             FontSize->12], 41], InsetBox[
+            StyleBox["\<\"\[FilledCircle]\"\>",
+             StripOnInput->False,
+             FontSize->12], 42], InsetBox[
+            StyleBox["\<\"\[FilledCircle]\"\>",
+             StripOnInput->False,
+             FontSize->12], 43], InsetBox[
+            StyleBox["\<\"\[FilledCircle]\"\>",
+             StripOnInput->False,
+             FontSize->12], 44], InsetBox[
+            StyleBox["\<\"\[FilledCircle]\"\>",
+             StripOnInput->False,
+             FontSize->12], 45], InsetBox[
+            StyleBox["\<\"\[FilledCircle]\"\>",
+             StripOnInput->False,
+             FontSize->12], 46], InsetBox[
+            StyleBox["\<\"\[FilledCircle]\"\>",
+             StripOnInput->False,
+             FontSize->12], 47], InsetBox[
+            StyleBox["\<\"\[FilledCircle]\"\>",
+             StripOnInput->False,
+             FontSize->12], 48]}, 
+          {RGBColor[0.6, 0.5470136627990908, 0.24], InsetBox[
+            StyleBox["\<\"\[FilledSquare]\"\>",
+             StripOnInput->False,
+             FontSize->12], 49], InsetBox[
+            StyleBox["\<\"\[FilledSquare]\"\>",
+             StripOnInput->False,
+             FontSize->12], 50], InsetBox[
+            StyleBox["\<\"\[FilledSquare]\"\>",
+             StripOnInput->False,
+             FontSize->12], 51], InsetBox[
+            StyleBox["\<\"\[FilledSquare]\"\>",
+             StripOnInput->False,
+             FontSize->12], 52], InsetBox[
+            StyleBox["\<\"\[FilledSquare]\"\>",
+             StripOnInput->False,
+             FontSize->12], 53], InsetBox[
+            StyleBox["\<\"\[FilledSquare]\"\>",
+             StripOnInput->False,
+             FontSize->12], 54], InsetBox[
+            StyleBox["\<\"\[FilledSquare]\"\>",
+             StripOnInput->False,
+             FontSize->12], 55], InsetBox[
+            StyleBox["\<\"\[FilledSquare]\"\>",
+             StripOnInput->False,
+             FontSize->12], 56], InsetBox[
+            StyleBox["\<\"\[FilledSquare]\"\>",
+             StripOnInput->False,
+             FontSize->12], 57], InsetBox[
+            StyleBox["\<\"\[FilledSquare]\"\>",
+             StripOnInput->False,
+             FontSize->12], 58], InsetBox[
+            StyleBox["\<\"\[FilledSquare]\"\>",
+             StripOnInput->False,
+             FontSize->12], 59], InsetBox[
+            StyleBox["\<\"\[FilledSquare]\"\>",
+             StripOnInput->False,
+             FontSize->12], 60], InsetBox[
+            StyleBox["\<\"\[FilledSquare]\"\>",
+             StripOnInput->False,
+             FontSize->12], 61], InsetBox[
+            StyleBox["\<\"\[FilledSquare]\"\>",
+             StripOnInput->False,
+             FontSize->12], 62], InsetBox[
+            StyleBox["\<\"\[FilledSquare]\"\>",
+             StripOnInput->False,
+             FontSize->12], 63], InsetBox[
+            StyleBox["\<\"\[FilledSquare]\"\>",
+             StripOnInput->False,
+             FontSize->12], 64]}, 
+          {RGBColor[0.24720000000000014`, 0.24, 0.6], InsetBox[
+            StyleBox["\<\"\[FilledCircle]\"\>",
+             StripOnInput->False,
+             FontSize->24], 65], InsetBox[
+            StyleBox["\<\"\[FilledCircle]\"\>",
+             StripOnInput->False,
+             FontSize->24], 66]}, 
+          {RGBColor[0.6, 0.5470136627990908, 0.24], InsetBox[
+            StyleBox["\<\"\[FilledSquare]\"\>",
+             StripOnInput->False,
+             FontSize->24], 67], InsetBox[
+            StyleBox["\<\"\[FilledSquare]\"\>",
+             StripOnInput->False,
+             FontSize->24], 68]}, {}}], {}}, 
+       {RGBColor[0.24720000000000014`, 0.24, 0.6], Thickness[Large], 
+        Dashing[{Small, Small}], CircleBox[{0, 0}]}, 
+       {RGBColor[0.6, 0.5470136627990908, 0.24], Thickness[Large], 
+        Dashing[{Small, Small}], CircleBox[{2.5, 0}]}},
+      AspectRatio->0.4444444444444444,
+      Axes->None,
+      AxesOrigin->{0., 0.},
+      FrameStyle->{
+        Directive[FontFamily -> "Futura", FontSize -> 12, 
+         GrayLevel[0]], 
+        Directive[FontFamily -> "Futura", FontSize -> 12]},
+      Method->{},
+      PlotLabel->FormBox[
+        StyleBox[
+        "\"b) failed ball recovery for two clusters\"", FontFamily -> 
+         "Futura", FontSize -> 17, 
+         RGBColor[
+          Rational[227, 256], 
+          Rational[29, 256], 
+          Rational[59, 128]], StripOnInput -> False], TraditionalForm],
+      PlotRange->All,
+      PlotRangeClipping->True,
+      PlotRangePadding->{{0.0863072, 0.0863072}, {0.0356016, 0.0356016}}], {576., -84.},
+      ImageScaled[{0.5, 0.5}], {360., 160.}]}, 
+   StyleBox[{{}, 
+     {RGBColor[
+       NCache[
+        Rational[227, 256], 0.88671875], 
+       NCache[
+        Rational[29, 256], 0.11328125], 
+       NCache[
+        Rational[59, 128], 0.4609375]], Dashing[{Small, Small}], 
+      LineBox[{{384., 0}, {384., -168.}}]}},
+    Antialiasing->False]},
+  ContentSelectable->True,
+  ImageSize->{700, 234},
+  PlotLabel->FormBox[
+    StyleBox[
+     TagBox[
+      GridBox[{{"\"successful and failed 2-ball recoveries for R = 2.5\""}, {
+        "\"n = 15 points drawn from each ball (dashed) are independent \
+samples of uniform distribution\""}, {
+        "\"points in same cluster have same marker and color; medoids are \
+large points\""}}, AutoDelete -> False, 
+       GridBoxItemSize -> {
+        "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Grid"], 15, 
+     FontFamily -> "Futura", StripOnInput -> False], TraditionalForm],
+  PlotRangePadding->{6, 5}]], "Output",
+ CellChangeTimes->{{3.586468263279014*^9, 3.5864683007205143`*^9}, {
+   3.586468358926421*^9, 3.586468393824247*^9}, 3.586468727310204*^9, {
+   3.586468786245839*^9, 3.586468823318701*^9}, {3.586468898333201*^9, 
+   3.58646890579668*^9}, 3.586468952504963*^9, 3.586474173064*^9, 
+   3.5864742129011087`*^9, 3.586474269155128*^9, {3.586474324558926*^9, 
+   3.58647434814712*^9}, 3.586475735589427*^9, 3.586476919532178*^9, 
+   3.5864772897477627`*^9, {3.5864778060348883`*^9, 3.5864778318210793`*^9}, 
+   3.586477919604896*^9, {3.586478045107225*^9, 3.586478090085224*^9}, 
+   3.5864781477753277`*^9, {3.5864792480206614`*^9, 3.586479264447266*^9}, {
+   3.586510387644804*^9, 3.586510485148059*^9}, 3.58714671014913*^9, 
+   3.5874680985951347`*^9, 3.5874682747220573`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"plotbottom", "=", 
+  RowBox[{"GraphicsGrid", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"{", 
+      RowBox[{"s3", ",", "f3"}], "}"}], "}"}], ",", " ", 
+    RowBox[{"ImageSize", "\[Rule]", 
+     RowBox[{"{", 
+      RowBox[{"700", ",", "311"}], "}"}]}], ",", 
+    RowBox[{"Dividers", "\[Rule]", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"False", ",", " ", 
+         RowBox[{"Directive", "[", 
+          RowBox[{"Dashed", ",", 
+           RowBox[{"RGBColor", "[", 
+            RowBox[{
+             RowBox[{"227", "/", "256"}], ",", 
+             RowBox[{"29", "/", "256"}], ",", 
+             RowBox[{"118", "/", "256"}]}], "]"}]}], "]"}], ",", " ", 
+         "False"}], "}"}], ",", " ", 
+       RowBox[{"{", " ", 
+        RowBox[{
+         RowBox[{"Directive", "[", 
+          RowBox[{"Dashed", ",", 
+           RowBox[{"RGBColor", "[", 
+            RowBox[{
+             RowBox[{"227", "/", "256"}], ",", 
+             RowBox[{"29", "/", "256"}], ",", 
+             RowBox[{"118", "/", "256"}]}], "]"}]}], "]"}], ",", "False"}], 
+        "}"}]}], "}"}]}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.586468308689302*^9, 3.586468314000396*^9}, {
+   3.586468831450182*^9, 3.586468837105838*^9}, {3.5864689087306232`*^9, 
+   3.586468909969513*^9}, {3.586475725672999*^9, 3.586475728104846*^9}, {
+   3.586478187505035*^9, 3.586478193290819*^9}, 3.586478480514957*^9, {
+   3.586478654189045*^9, 3.5864786772919607`*^9}, {3.5864787964001827`*^9, 
+   3.586478797167547*^9}, {3.5864789743904047`*^9, 3.586478994838531*^9}, {
+   3.586510488923514*^9, 3.586510511082893*^9}}],
+
+Cell[BoxData[
+ GraphicsBox[{{}, {InsetBox[
+     GraphicsBox[{{{}, GraphicsComplexBox[CompressedData["
+1:eJxTTMoPSmViYGBIA2IQfezhmfXPGM7ad74/skbc+ag9/xzjRVvMn9i7zeQ1
+Onni5v4Z+voH7Kwe26fI/WxufH5j//PHtwIMz13fz7Y78faiM0/tX3e3bJvj
+fdBeWfSYWJPM6/1Hn4EUPN7PzOY5P+xi/36/+m/KrikP99/RM7meueTlfslH
+EeLbLz6wf6p+1U62/5G9+PqzIV8fM9jnic96bXLpof1L17d1og8W7zf8LNpd
+88rLvv3nJ6Y3ix/ZJxaclf2rv3z//b8f47YanbXXC7uSINX2bv/3iF8XWL+e
+td/MU7im+/YN+4sv+JLSue7bpzIK7yg1f73/o/ffPSs9rttzXV9cYMv1dv/x
+XTt62QpYHKZ+fG+sJ3Ntf+NU5+6c5//tH5X+bbq74el+VhNBMxtbNgedK7Oe
+yS6/sP+I09rMe4XsDh81GY4ZZ9yyj/M+wW4rzeFwbDmDxPkF9+1nlc9ZpLyT
+wUHOOEDyv93j/e9PHgbqYHOI3rj/zTybK/t7vF6xmExkcVA/sOHPz2077IM8
+5zaoOXE4dL5a27hW6MR+4cTDl7Wfsjnck38fqi18yj7dJTP/QyuHw/NjX1pU
+5S7YHwCaohPC7OAADohH+8HG6jA7bAhtOvrwzP79T5rnnV3lz+4grP7dWoT1
+zf6IFaZnrf1+2W+J/LrzVtdde+MjG/XyFr+1B6s7z+7AuyzxR8eMh/ZvefcZ
+zNT6Z7/6/NWwN/of7SWmXuHMUGJ2CNLZvkVK6D5UnsVB7PfpdycPf7a3qwSZ
+zOgQU/45pP3OG3tJljA+3U2sDizPezTe9jI6PHo5dRNPIZPDnpLJEixh/+y/
+Tb87ub31t/0U352HdsfcsT8VcnDFEr+f9rlhteu2JX23v1fY1fekiMMh57wO
+Z0DwffuVS/wchBP/2t9xY67gVvlonwYCzxgdPiafifU+8dVe9uRT+yXxLA4d
+rVGX9zz+bf8mcIdc62tGB5dfb18fsPxov2z2EYUNRT8x0g86Hz380Pno9qPz
+R/PLaH4ZzS/E5xcAf8U+zQ==
+         "], {
+          {RGBColor[0.6, 0.24, 0.4428931686004542], InsetBox[
+            StyleBox["\<\"\[FilledCircle]\"\>",
+             StripOnInput->False,
+             FontSize->12], 52], InsetBox[
+            StyleBox["\<\"\[FilledCircle]\"\>",
+             StripOnInput->False,
+             FontSize->12], 53], InsetBox[
+            StyleBox["\<\"\[FilledCircle]\"\>",
+             StripOnInput->False,
+             FontSize->12], 54], InsetBox[
+            StyleBox["\<\"\[FilledCircle]\"\>",
+             StripOnInput->False,
+             FontSize->12], 55], InsetBox[
+            StyleBox["\<\"\[FilledCircle]\"\>",
+             StripOnInput->False,
+             FontSize->12], 56], InsetBox[
+            StyleBox["\<\"\[FilledCircle]\"\>",
+             StripOnInput->False,
+             FontSize->12], 57], InsetBox[
+            StyleBox["\<\"\[FilledCircle]\"\>",
+             StripOnInput->False,
+             FontSize->12], 58], InsetBox[
+            StyleBox["\<\"\[FilledCircle]\"\>",
+             StripOnInput->False,
+             FontSize->12], 59], InsetBox[
+            StyleBox["\<\"\[FilledCircle]\"\>",
+             StripOnInput->False,
+             FontSize->12], 60], InsetBox[
+            StyleBox["\<\"\[FilledCircle]\"\>",
+             StripOnInput->False,
+             FontSize->12], 61], InsetBox[
+            StyleBox["\<\"\[FilledCircle]\"\>",
+             StripOnInput->False,
+             FontSize->12], 62], InsetBox[
+            StyleBox["\<\"\[FilledCircle]\"\>",
+             StripOnInput->False,
+             FontSize->12], 63], InsetBox[
+            StyleBox["\<\"\[FilledCircle]\"\>",
+             StripOnInput->False,
+             FontSize->12], 64], InsetBox[
+            StyleBox["\<\"\[FilledCircle]\"\>",
+             StripOnInput->False,
+             FontSize->12], 65], InsetBox[
+            StyleBox["\<\"\[FilledCircle]\"\>",
+             StripOnInput->False,
+             FontSize->12], 66]}, 
+          {RGBColor[0.6, 0.5470136627990908, 0.24], InsetBox[
+            StyleBox["\<\"\[FilledSquare]\"\>",
+             StripOnInput->False,
+             FontSize->12], 67], InsetBox[
+            StyleBox["\<\"\[FilledSquare]\"\>",
+             StripOnInput->False,
+             FontSize->12], 68], InsetBox[
+            StyleBox["\<\"\[FilledSquare]\"\>",
+             StripOnInput->False,
+             FontSize->12], 69], InsetBox[
+            StyleBox["\<\"\[FilledSquare]\"\>",
+             StripOnInput->False,
+             FontSize->12], 70], InsetBox[
+            StyleBox["\<\"\[FilledSquare]\"\>",
+             StripOnInput->False,
+             FontSize->12], 71], InsetBox[
+            StyleBox["\<\"\[FilledSquare]\"\>",
+             StripOnInput->False,
+             FontSize->12], 72], InsetBox[
+            StyleBox["\<\"\[FilledSquare]\"\>",
+             StripOnInput->False,
+             FontSize->12], 73], InsetBox[
+            StyleBox["\<\"\[FilledSquare]\"\>",
+             StripOnInput->False,
+             FontSize->12], 74], InsetBox[
+            StyleBox["\<\"\[FilledSquare]\"\>",
+             StripOnInput->False,
+             FontSize->12], 75], InsetBox[
+            StyleBox["\<\"\[FilledSquare]\"\>",
+             StripOnInput->False,
+             FontSize->12], 76], InsetBox[
+            StyleBox["\<\"\[FilledSquare]\"\>",
+             StripOnInput->False,
+             FontSize->12], 77], InsetBox[
+            StyleBox["\<\"\[FilledSquare]\"\>",
+             StripOnInput->False,
+             FontSize->12], 78], InsetBox[
+            StyleBox["\<\"\[FilledSquare]\"\>",
+             StripOnInput->False,
+             FontSize->12], 79], InsetBox[
+            StyleBox["\<\"\[FilledSquare]\"\>",
+             StripOnInput->False,
+             FontSize->12], 80], InsetBox[
+            StyleBox["\<\"\[FilledSquare]\"\>",
+             StripOnInput->False,
+             FontSize->12], 81]}, 
+          {RGBColor[0.24720000000000014`, 0.24, 0.6], InsetBox[
+            StyleBox["\<\"\[FilledDiamond]\"\>",
+             StripOnInput->False,
+             FontSize->12], 82], InsetBox[
+            StyleBox["\<\"\[FilledDiamond]\"\>",
+             StripOnInput->False,
+             FontSize->12], 83], InsetBox[
+            StyleBox["\<\"\[FilledDiamond]\"\>",
+             StripOnInput->False,
+             FontSize->12], 84], InsetBox[
+            StyleBox["\<\"\[FilledDiamond]\"\>",
+             StripOnInput->False,
+             FontSize->12], 85], InsetBox[
+            StyleBox["\<\"\[FilledDiamond]\"\>",
+             StripOnInput->False,
+             FontSize->12], 86], InsetBox[
+            StyleBox["\<\"\[FilledDiamond]\"\>",
+             StripOnInput->False,
+             FontSize->12], 87], InsetBox[
+            StyleBox["\<\"\[FilledDiamond]\"\>",
+             StripOnInput->False,
+             FontSize->12], 88], InsetBox[
+            StyleBox["\<\"\[FilledDiamond]\"\>",
+             StripOnInput->False,
+             FontSize->12], 89], InsetBox[
+            StyleBox["\<\"\[FilledDiamond]\"\>",
+             StripOnInput->False,
+             FontSize->12], 90], InsetBox[
+            StyleBox["\<\"\[FilledDiamond]\"\>",
+             StripOnInput->False,
+             FontSize->12], 91], InsetBox[
+            StyleBox["\<\"\[FilledDiamond]\"\>",
+             StripOnInput->False,
+             FontSize->12], 92], InsetBox[
+            StyleBox["\<\"\[FilledDiamond]\"\>",
+             StripOnInput->False,
+             FontSize->12], 93], InsetBox[
+            StyleBox["\<\"\[FilledDiamond]\"\>",
+             StripOnInput->False,
+             FontSize->12], 94], InsetBox[
+            StyleBox["\<\"\[FilledDiamond]\"\>",
+             StripOnInput->False,
+             FontSize->12], 95], InsetBox[
+            StyleBox["\<\"\[FilledDiamond]\"\>",
+             StripOnInput->False,
+             FontSize->12], 96]}, 
+          {RGBColor[0.6, 0.24, 0.4428931686004542], InsetBox[
+            StyleBox["\<\"\[FilledCircle]\"\>",
+             StripOnInput->False,
+             FontSize->24], 97], InsetBox[
+            StyleBox["\<\"\[FilledCircle]\"\>",
+             StripOnInput->False,
+             FontSize->24], 98]}, 
+          {RGBColor[0.6, 0.5470136627990908, 0.24], InsetBox[
+            StyleBox["\<\"\[FilledSquare]\"\>",
+             StripOnInput->False,
+             FontSize->24], 99], InsetBox[
+            StyleBox["\<\"\[FilledSquare]\"\>",
+             StripOnInput->False,
+             FontSize->24], 100]}, 
+          {RGBColor[0.24720000000000014`, 0.24, 0.6], InsetBox[
+            StyleBox["\<\"\[FilledDiamond]\"\>",
+             StripOnInput->False,
+             FontSize->24], 101], InsetBox[
+            StyleBox["\<\"\[FilledDiamond]\"\>",
+             StripOnInput->False,
+             FontSize->24], 102]}, {}}], {}}, 
+       {RGBColor[0.6, 0.24, 0.4428931686004542], Thickness[Large], 
+        Dashing[{Small, Small}], CircleBox[{0, 0}]}, 
+       {RGBColor[0.6, 0.5470136627990908, 0.24], Thickness[Large], 
+        Dashing[{Small, Small}], CircleBox[{2.5, 0}]}, 
+       {RGBColor[0.24720000000000014`, 0.24, 0.6], Thickness[Large], 
+        Dashing[{Small, Small}], CircleBox[{1.25, 2.1650635094610964`}]}},
+      AspectRatio->0.8888888888888888,
+      Axes->None,
+      AxesOrigin->{0., 0.},
+      FrameStyle->{
+        Directive[FontFamily -> "Futura", FontSize -> 12, 
+         GrayLevel[0]], 
+        Directive[FontFamily -> "Futura", FontSize -> 12]},
+      Method->{},
+      PlotLabel->FormBox[
+        StyleBox[
+        "\"c) ball recovery for three clusters\"", FontFamily -> "Futura", 
+         FontSize -> 17, 
+         RGBColor[
+          Rational[227, 256], 
+          Rational[29, 256], 
+          Rational[59, 128]], StripOnInput -> False], TraditionalForm],
+      PlotRange->All,
+      PlotRangeClipping->True,
+      PlotRangePadding->{{0.0733034, 0.0733034}, {0.0801994, 0.0801994}}], {192., -168.},
+      ImageScaled[{0.5, 0.5}], {360., 320.}], InsetBox[
+     GraphicsBox[{{{}, GraphicsComplexBox[CompressedData["
+1:eJxTTMoPSmViYGBIA2IQrX3vhM0n9vv2p3XXth2xfbVfwDr4xZ5jb/f79Fkv
+bf56fD/DY0mTL/7X9serbHka03Xf/oy6dttq5g32JoJmNnuD7u1f9NFF4PnD
+KftLJ0uwhPG9to99GKv3yPq1/X3Rg//DNt3cX7V6nbOp6kx73x9L6+6FvLM/
+eSLyxmW+m/t76+cXPnS4s/+U0ZGNenk37fd9OzOJwXSjvX2QS1vonkf7UyKO
+Ss90f2bPAAZX7CdVPuFnm/fM/k4GQ34jy1F7p00NnHd23d8vluX7uS/4wv4D
+dlalTzffs0/WUL8V6nF9//SjR549vvVkP9edXbOXWz3c/3jp7CMKG17sfzV1
+E0/hmt/2v+qy9pRMfmi/SS9vMeOe3/Ybu8yN+v88tlfKqahaqvPb/kunjeeu
+tAv7NWP6D33V+GPvXg4KmTv7S9ymfGO7z+bwaUbjqR/fn+9P60iOvXOM2eGf
+86+3rw+83T/j7uT21lucDpURK0zPWt+xT5V8FCG+ndOh7MEcwaV7T+7/d6Xi
+pZohi8POXrYPYh6P9uuDrG9ld6hk/HZxpfYze+8T7Lazr3I4hKv9CbLPP2fv
+lyQQYbmFy0Fw1ZU3jWEb9qeuSggJWs7l0Kd87VEwwxl7fzlQCLA7QML7kX3G
+xLc19qYsDjfPfQ9+vPTB/tMCx3ft6P1lH/BHovi6EJvDdaFPjufTGBw85zao
+HWr7Y98IJJeH/7e/8eGLVyQbiwM4GnU/20sF3pKuecjhoGU16XS9x2P7WJAH
+s9kcIOnkij3r0X7Dct1/9gKl8g1X1J7bg8Ml/qf9NOfunOe//9kDfcUqNIXR
+YerH98Z6Mm/sE0OC1BdwMkDN/24/x3jRFvMfDA4Q9V/twdbYszuY50RPualw
+2V7/rgpboyiTg71p3C5Pnr/2uoryX3LC2B2AcQ+0mNHh8r0H3JM1GR3AqaH/
+s/3fb6UP5kxkcEBPT+h89PhA56O7D50/ml9G88tofiE+vwAAPLYa6w==
+         "], {
+          {RGBColor[0.24720000000000014`, 0.24, 0.6], InsetBox[
+            StyleBox["\<\"\[FilledCircle]\"\>",
+             StripOnInput->False,
+             FontSize->12], 52], InsetBox[
+            StyleBox["\<\"\[FilledCircle]\"\>",
+             StripOnInput->False,
+             FontSize->12], 53], InsetBox[
+            StyleBox["\<\"\[FilledCircle]\"\>",
+             StripOnInput->False,
+             FontSize->12], 54], InsetBox[
+            StyleBox["\<\"\[FilledCircle]\"\>",
+             StripOnInput->False,
+             FontSize->12], 55], InsetBox[
+            StyleBox["\<\"\[FilledCircle]\"\>",
+             StripOnInput->False,
+             FontSize->12], 56], InsetBox[
+            StyleBox["\<\"\[FilledCircle]\"\>",
+             StripOnInput->False,
+             FontSize->12], 57], InsetBox[
+            StyleBox["\<\"\[FilledCircle]\"\>",
+             StripOnInput->False,
+             FontSize->12], 58], InsetBox[
+            StyleBox["\<\"\[FilledCircle]\"\>",
+             StripOnInput->False,
+             FontSize->12], 59], InsetBox[
+            StyleBox["\<\"\[FilledCircle]\"\>",
+             StripOnInput->False,
+             FontSize->12], 60], InsetBox[
+            StyleBox["\<\"\[FilledCircle]\"\>",
+             StripOnInput->False,
+             FontSize->12], 61], InsetBox[
+            StyleBox["\<\"\[FilledCircle]\"\>",
+             StripOnInput->False,
+             FontSize->12], 62], InsetBox[
+            StyleBox["\<\"\[FilledCircle]\"\>",
+             StripOnInput->False,
+             FontSize->12], 63], InsetBox[
+            StyleBox["\<\"\[FilledCircle]\"\>",
+             StripOnInput->False,
+             FontSize->12], 64], InsetBox[
+            StyleBox["\<\"\[FilledCircle]\"\>",
+             StripOnInput->False,
+             FontSize->12], 65], InsetBox[
+            StyleBox["\<\"\[FilledCircle]\"\>",
+             StripOnInput->False,
+             FontSize->12], 66], InsetBox[
+            StyleBox["\<\"\[FilledCircle]\"\>",
+             StripOnInput->False,
+             FontSize->12], 67], InsetBox[
+            StyleBox["\<\"\[FilledCircle]\"\>",
+             StripOnInput->False,
+             FontSize->12], 68], InsetBox[
+            StyleBox["\<\"\[FilledCircle]\"\>",
+             StripOnInput->False,
+             FontSize->12], 69], InsetBox[
+            StyleBox["\<\"\[FilledCircle]\"\>",
+             StripOnInput->False,
+             FontSize->12], 70]}, 
+          {RGBColor[0.6, 0.5470136627990908, 0.24], InsetBox[
+            StyleBox["\<\"\[FilledSquare]\"\>",
+             StripOnInput->False,
+             FontSize->12], 71], InsetBox[
+            StyleBox["\<\"\[FilledSquare]\"\>",
+             StripOnInput->False,
+             FontSize->12], 72], InsetBox[
+            StyleBox["\<\"\[FilledSquare]\"\>",
+             StripOnInput->False,
+             FontSize->12], 73], InsetBox[
+            StyleBox["\<\"\[FilledSquare]\"\>",
+             StripOnInput->False,
+             FontSize->12], 74], InsetBox[
+            StyleBox["\<\"\[FilledSquare]\"\>",
+             StripOnInput->False,
+             FontSize->12], 75], InsetBox[
+            StyleBox["\<\"\[FilledSquare]\"\>",
+             StripOnInput->False,
+             FontSize->12], 76], InsetBox[
+            StyleBox["\<\"\[FilledSquare]\"\>",
+             StripOnInput->False,
+             FontSize->12], 77], InsetBox[
+            StyleBox["\<\"\[FilledSquare]\"\>",
+             StripOnInput->False,
+             FontSize->12], 78], InsetBox[
+            StyleBox["\<\"\[FilledSquare]\"\>",
+             StripOnInput->False,
+             FontSize->12], 79], InsetBox[
+            StyleBox["\<\"\[FilledSquare]\"\>",
+             StripOnInput->False,
+             FontSize->12], 80], InsetBox[
+            StyleBox["\<\"\[FilledSquare]\"\>",
+             StripOnInput->False,
+             FontSize->12], 81]}, 
+          {RGBColor[0.6, 0.24, 0.4428931686004542], InsetBox[
+            StyleBox["\<\"\[FilledDiamond]\"\>",
+             StripOnInput->False,
+             FontSize->12], 82], InsetBox[
+            StyleBox["\<\"\[FilledDiamond]\"\>",
+             StripOnInput->False,
+             FontSize->12], 83], InsetBox[
+            StyleBox["\<\"\[FilledDiamond]\"\>",
+             StripOnInput->False,
+             FontSize->12], 84], InsetBox[
+            StyleBox["\<\"\[FilledDiamond]\"\>",
+             StripOnInput->False,
+             FontSize->12], 85], InsetBox[
+            StyleBox["\<\"\[FilledDiamond]\"\>",
+             StripOnInput->False,
+             FontSize->12], 86], InsetBox[
+            StyleBox["\<\"\[FilledDiamond]\"\>",
+             StripOnInput->False,
+             FontSize->12], 87], InsetBox[
+            StyleBox["\<\"\[FilledDiamond]\"\>",
+             StripOnInput->False,
+             FontSize->12], 88], InsetBox[
+            StyleBox["\<\"\[FilledDiamond]\"\>",
+             StripOnInput->False,
+             FontSize->12], 89], InsetBox[
+            StyleBox["\<\"\[FilledDiamond]\"\>",
+             StripOnInput->False,
+             FontSize->12], 90], InsetBox[
+            StyleBox["\<\"\[FilledDiamond]\"\>",
+             StripOnInput->False,
+             FontSize->12], 91], InsetBox[
+            StyleBox["\<\"\[FilledDiamond]\"\>",
+             StripOnInput->False,
+             FontSize->12], 92], InsetBox[
+            StyleBox["\<\"\[FilledDiamond]\"\>",
+             StripOnInput->False,
+             FontSize->12], 93], InsetBox[
+            StyleBox["\<\"\[FilledDiamond]\"\>",
+             StripOnInput->False,
+             FontSize->12], 94], InsetBox[
+            StyleBox["\<\"\[FilledDiamond]\"\>",
+             StripOnInput->False,
+             FontSize->12], 95], InsetBox[
+            StyleBox["\<\"\[FilledDiamond]\"\>",
+             StripOnInput->False,
+             FontSize->12], 96]}, 
+          {RGBColor[0.24720000000000014`, 0.24, 0.6], InsetBox[
+            StyleBox["\<\"\[FilledCircle]\"\>",
+             StripOnInput->False,
+             FontSize->24], 97], InsetBox[
+            StyleBox["\<\"\[FilledCircle]\"\>",
+             StripOnInput->False,
+             FontSize->24], 98]}, 
+          {RGBColor[0.6, 0.5470136627990908, 0.24], InsetBox[
+            StyleBox["\<\"\[FilledSquare]\"\>",
+             StripOnInput->False,
+             FontSize->24], 99], InsetBox[
+            StyleBox["\<\"\[FilledSquare]\"\>",
+             StripOnInput->False,
+             FontSize->24], 100]}, 
+          {RGBColor[0.6, 0.24, 0.4428931686004542], InsetBox[
+            StyleBox["\<\"\[FilledDiamond]\"\>",
+             StripOnInput->False,
+             FontSize->24], 101], InsetBox[
+            StyleBox["\<\"\[FilledDiamond]\"\>",
+             StripOnInput->False,
+             FontSize->24], 102]}, {}}], {}}, 
+       {RGBColor[0.24720000000000014`, 0.24, 0.6], Thickness[Large], 
+        Dashing[{Small, Small}], CircleBox[{0, 0}]}, 
+       {RGBColor[0.6, 0.5470136627990908, 0.24], Thickness[Large], 
+        Dashing[{Small, Small}], CircleBox[{2.5, 0}]}, 
+       {RGBColor[0.6, 0.24, 0.4428931686004542], Thickness[Large], 
+        Dashing[{Small, Small}], CircleBox[{1.25, 2.1650635094610964`}]}},
+      AspectRatio->0.8888888888888888,
+      Axes->None,
+      AxesOrigin->{0., 0.},
+      Method->{},
+      PlotLabel->FormBox[
+        StyleBox[
+        "\"d) failed ball recovery for three clusters\"", FontFamily -> 
+         "Futura", FontSize -> 17, 
+         RGBColor[
+          Rational[227, 256], 
+          Rational[29, 256], 
+          Rational[59, 128]], StripOnInput -> False], TraditionalForm],
+      PlotRange->All,
+      PlotRangeClipping->True,
+      PlotRangePadding->{{0.08537020000000001, 0.08537020000000001}, {
+       0.08079800000000001, 0.08079800000000001}}], {576., -168.}, 
+     ImageScaled[{0.5, 0.5}], {360., 320.}]}, 
+   StyleBox[{{}, {
+      {RGBColor[
+        NCache[
+         Rational[227, 256], 0.88671875], 
+        NCache[
+         Rational[29, 256], 0.11328125], 
+        NCache[
+         Rational[59, 128], 0.4609375]], Dashing[{Small, Small}], 
+       LineBox[{{384., 0}, {384., -336.}}]}, 
+      {RGBColor[
+        NCache[
+         Rational[227, 256], 0.88671875], 
+        NCache[
+         Rational[29, 256], 0.11328125], 
+        NCache[
+         Rational[59, 128], 0.4609375]], Dashing[{Small, Small}], 
+       LineBox[{{0, 0}, {384., 0}}]}, 
+      {RGBColor[
+        NCache[
+         Rational[227, 256], 0.88671875], 
+        NCache[
+         Rational[29, 256], 0.11328125], 
+        NCache[
+         Rational[59, 128], 0.4609375]], Dashing[{Small, Small}], 
+       LineBox[{{384., 0}, {768., 0}}]}}},
+    Antialiasing->False]},
+  ContentSelectable->True,
+  ImageSize->{700, 311},
+  PlotRangePadding->{6, 5}]], "Output",
+ CellChangeTimes->{
+  3.586468177265716*^9, {3.586468309334281*^9, 3.5864683145430393`*^9}, {
+   3.586468832995781*^9, 3.586468837684249*^9}, {3.586468898634036*^9, 
+   3.586468910745922*^9}, 3.5864757287924757`*^9, 3.586477292974084*^9, 
+   3.5864781946229343`*^9, 3.586478481694263*^9, {3.5864786559983187`*^9, 
+   3.5864786777180433`*^9}, 3.586478798025921*^9, {3.586478985551268*^9, 
+   3.586478995539156*^9}, {3.5864792484353247`*^9, 3.5864792646459923`*^9}, {
+   3.5865104896883497`*^9, 3.586510511554462*^9}, 3.5871467179530993`*^9, 
+   3.58746811283228*^9, 3.5874682772420893`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Export", "[", 
+  RowBox[{"\"\<failtop.pdf\>\"", ",", "plottop", ",", 
+   RowBox[{"\"\<AllowRasterization\>\"", "\[Rule]", "True"}], ",", 
+   RowBox[{"ImageResolution", "\[Rule]", "600"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.5864757849327*^9, 3.586475809095791*^9}}],
+
+Cell[BoxData["\<\"failtop.pdf\"\>"], "Output",
+ CellChangeTimes->{
+  3.5864758110352297`*^9, 3.586478207016315*^9, {3.586479249116205*^9, 
+   3.58647926581135*^9}, 3.58651051811808*^9, 3.587146721014604*^9, 
+   3.587468283829359*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Export", "[", 
+  RowBox[{"\"\<failbottom.pdf\>\"", ",", "plotbottom", ",", 
+   RowBox[{"\"\<AllowRasterization\>\"", "\[Rule]", "True"}], ",", 
+   RowBox[{"ImageResolution", "\[Rule]", "600"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.5864758545695066`*^9, 3.5864758601211987`*^9}}],
+
+Cell[BoxData["\<\"failbottom.pdf\"\>"], "Output",
+ CellChangeTimes->{
+  3.586475861362562*^9, 3.586478210041246*^9, 3.586478493287841*^9, 
+   3.58647868642297*^9, 3.58647882170308*^9, {3.586479249523286*^9, 
+   3.5864792666415358`*^9}, 3.5864794986006193`*^9, 3.586510521541685*^9, 
+   3.5871467235357018`*^9, 3.5874682938559027`*^9}]
+}, Open  ]]
+},
+WindowSize->{996, 715},
+WindowMargins->{{-22, Automatic}, {-343, Automatic}},
+FrontEndVersion->"9.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (November 20, \
+2012)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[579, 22, 132, 3, 28, "Input"],
+Cell[714, 27, 146, 2, 28, "Output"]
+}, Open  ]],
+Cell[875, 32, 1167, 22, 97, "Input"],
+Cell[2045, 56, 1784, 45, 97, "Input"],
+Cell[3832, 103, 1128, 31, 80, "Input"],
+Cell[4963, 136, 1459, 41, 97, "Input"],
+Cell[6425, 179, 1090, 31, 80, "Input"],
+Cell[CellGroupData[{
+Cell[7540, 214, 5360, 121, 233, "Input"],
+Cell[12903, 337, 9519, 223, 360, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[22459, 565, 4184, 98, 199, "Input"],
+Cell[26646, 665, 8308, 203, 360, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[34991, 873, 3805, 87, 165, "Input"],
+Cell[38799, 962, 6181, 151, 201, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[45017, 1118, 3732, 87, 148, "Input"],
+Cell[48752, 1207, 6384, 155, 201, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[55173, 1367, 2367, 54, 131, "Input"],
+Cell[57543, 1423, 14334, 325, 249, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[71914, 1753, 1624, 39, 63, "Input"],
+Cell[73541, 1794, 19457, 445, 326, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[93035, 2244, 294, 5, 28, "Input"],
+Cell[93332, 2251, 233, 4, 28, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[93602, 2260, 306, 5, 28, "Input"],
+Cell[93911, 2267, 334, 5, 86, "Output"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
